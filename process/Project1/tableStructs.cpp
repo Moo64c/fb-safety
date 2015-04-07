@@ -14,7 +14,7 @@ struct corpusWord_t{
 	unsigned int score;
 };
 
-struct rawEntry_t {
+struct rawEventEntry_t {
 	int userIdTo;
 	int userIdFrom;
 	int eventId;
@@ -27,7 +27,8 @@ struct rawEntry_t {
 };
 
 struct processedEvent_t {
-	int userId;
+	int userIdTo;
+	int userIdFrom;
 	int eventId;
 	int severity;
 	int popularity;
