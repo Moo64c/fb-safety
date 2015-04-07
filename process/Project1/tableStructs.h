@@ -47,5 +47,6 @@ struct userData_t {
 	int averageSeverity;
 	int frequency;
 };
-
+rawEventEntry_t newEvent;
+processedEvent_t event1;
 #endif //PROCESSOR_DATA_TYPES
