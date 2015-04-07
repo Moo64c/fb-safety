@@ -39,7 +39,16 @@ function fb_safety_pages_default_page_manager_pages() {
     'body_classes_to_add' => '',
     'css_id' => '',
     'css' => '',
-    'contexts' => array(),
+    'contexts' => array(
+      0 => array(
+        'identifier' => 'User',
+        'keyword' => 'user',
+        'name' => 'user',
+        'type' => 'current',
+        'uid' => '',
+        'id' => 1,
+      ),
+    ),
     'relationships' => array(),
   );
   $display = new panels_display();
@@ -62,8 +71,31 @@ function fb_safety_pages_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
+    $pane->pid = 'new-2671ff36-436c-4930-8d88-854db89b57f6';
+    $pane->panel = 'bottom';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'events-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'uid' => '%user:uid',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '2671ff36-436c-4930-8d88-854db89b57f6';
+    $display->content['new-2671ff36-436c-4930-8d88-854db89b57f6'] = $pane;
+    $display->panels['bottom'][0] = 'new-2671ff36-436c-4930-8d88-854db89b57f6';
+    $pane = new stdClass();
     $pane->pid = 'new-9fe4cf12-f796-450c-a21b-c221ab4a19ce';
-    $pane->panel = 'left';
+    $pane->panel = 'top';
     $pane->type = 'block';
     $pane->subtype = 'user-login';
     $pane->shown = TRUE;
@@ -82,26 +114,7 @@ function fb_safety_pages_default_page_manager_pages() {
     $pane->locks = array();
     $pane->uuid = '9fe4cf12-f796-450c-a21b-c221ab4a19ce';
     $display->content['new-9fe4cf12-f796-450c-a21b-c221ab4a19ce'] = $pane;
-    $display->panels['left'][0] = 'new-9fe4cf12-f796-450c-a21b-c221ab4a19ce';
-    $pane = new stdClass();
-    $pane->pid = 'new-2671ff36-436c-4930-8d88-854db89b57f6';
-    $pane->panel = 'middle';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'events-panel_pane_1';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array();
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $pane->locks = array();
-    $pane->uuid = '2671ff36-436c-4930-8d88-854db89b57f6';
-    $display->content['new-2671ff36-436c-4930-8d88-854db89b57f6'] = $pane;
-    $display->panels['middle'][0] = 'new-2671ff36-436c-4930-8d88-854db89b57f6';
+    $display->panels['top'][0] = 'new-9fe4cf12-f796-450c-a21b-c221ab4a19ce';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
