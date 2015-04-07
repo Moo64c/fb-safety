@@ -4,10 +4,26 @@
 #include <vector>
 #include <regex>
 #include "tableStructs.h"
-#include "DatabaseConnection.h" 
+#include "DatabaseConnection.h"
 #include "EventProcessor.h"
+#include "OfflineTable.h"
 #include "EventProcessor.cpp"
+#include "offlineTable.cpp"
 using namespace std;
+
+
+void eventProcessor(DatabaseConnection connection)
+{
+	EventProcessor EP;
+	EP.getNewEvent(connection);
+	int i_score = EP.calculateScore();
+	EP.evaluateSeverity(i_score);
+}
+
+void offlineTable(DatabaseConnection connection)
+{
+	OfflineTable::OfflineTable(connection);
+}
 
 int main (int argc, char **argv)
 {
@@ -31,11 +47,7 @@ int main (int argc, char **argv)
 		}
 	}
 	DatabaseConnection::DatabaseConnection(host, user, password, database);
-	
-	EventProcessor EP; 
-	EP.getNewEvent();
-	int i_score = EP.calculateScore();
-	EP.evaluateSeverity(i_score);
-
-
+	DatabaseConnection connection;
+	eventProcessor(connection);
+	offlineTable(connection);
 }
