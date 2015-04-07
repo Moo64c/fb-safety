@@ -1,0 +1,9 @@
+name = FB Safety Users
+core = 7.x
+package = Features
+dependencies[] = entityreference
+dependencies[] = features
+features[features_api][] = api:2
+features[field_base][] = field_children
+features[field_instance][] = user-user-field_children
+mtime = 1428408464
