@@ -7,11 +7,14 @@ const char* DatabaseConnection::DEFAULT_USER = "root";
 const char* DatabaseConnection::DEFAULT_PASSWORD = "qwerty";
 const char* DatabaseConnection::DEFAULT_DATABASE = "test";
 const char* DatabaseConnection::RAW_FACEBOOK_GET_NEW_ROWS_QUERY = "CALL `test`.`get_new_raw_data`();";
+const char* DatabaseConnection::GET_WORDS_QUERY = "CALL `test`.`get_words`();";
 
 DatabaseConnection::DatabaseConnection(const char *_host, const char *_user,
 	const char *_pass, const char *_db) :
 	con(0),
-	result(0),
+	raw_result(0),
+	word_result(0),
+	user_result(0),
 	host(_host),
 	user(_user),
 	pass(_pass),
@@ -38,18 +41,18 @@ int DatabaseConnection::runRawQuery()
 		return ans;
 	else
 	{
-		initResult();
-		result = mysql_store_result(con);
+		initMySQLResult(raw_result);
+		raw_result = mysql_store_result(con);
 		return ans;
 	}
 }
 
-void DatabaseConnection::initResult()
+void DatabaseConnection::initMySQLResult(MYSQL_RES *res)
 {
-	if (result != 0)
+	if (res != 0)
 	{
-		mysql_free_result(result);
-		result = 0;
+		mysql_free_result(res);
+		res = 0;
 	}
 }
 
@@ -57,6 +60,9 @@ void DatabaseConnection::initResult()
 DatabaseConnection::~DatabaseConnection()
 {
 	mysql_close(con);
+	initMySQLResult(raw_result);
+	initMySQLResult(word_result);
+	initMySQLResult(user_result);
 }
 
 rawEventEntry_t DatabaseConnection::getNextRow()
@@ -65,9 +71,9 @@ rawEventEntry_t DatabaseConnection::getNextRow()
 	res.userIdFrom = 0;
 	res.userIdTo = 0;
 
-	if (result == 0)
+	if (raw_result == 0)
 		return res;
-	MYSQL_ROW row = mysql_fetch_row(result);
+	MYSQL_ROW row = mysql_fetch_row(raw_result);
 
 	if (row == 0)
 	{
@@ -100,5 +106,31 @@ rawEventEntry_t DatabaseConnection::getNextRow()
 	res.row_id = atoi(buffer);
 
 	return res;
+}
+
+vector<corpusWord_t> DatabaseConnection::getWords()
+{
+	vector<corpusWord_t> ans;
+	mysql_query(con, GET_WORDS_QUERY);
+	initMySQLResult(word_result);
+	word_result = mysql_store_result(con);
+	MYSQL_ROW row;
+	while ((row = mysql_fetch_row(word_result)))
+	{
+		corpusWord_t corpus_word;
+
+		char buffer[200];
+		sprintf_s(buffer, "%s", row[0]);
+		corpus_word.cat = (category) atoi(buffer);
+
+		sprintf_s(buffer, "%s", row[1]);
+		corpus_word.word = buffer;
+
+		sprintf_s(buffer, "%s", row[2]);
+		corpus_word.score = atoi(buffer);
+
+		ans.push_back(corpus_word);
+	}
+	return ans;
 }
 
