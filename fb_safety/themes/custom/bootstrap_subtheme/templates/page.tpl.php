@@ -73,141 +73,96 @@
  * @ingroup themeable
  */
 ?>
-<!--Header content-->
-<header id="header">
-  <div id="messages">
-    <?php print $messages; ?>
-  </div>
-  <?php if ($tabs && user_access('administer content')): ?>
-    <div class="tabs">
-      <?php print render($tabs); ?>
-    </div>
-  <?php endif; ?>
-  <div class="row">
-    <div class="col-lg-7 col-md-8  upper_links">
-      <ul>
-        <li class="search">
-          <form action="<?php print $base_url; ?>search">
-            <input name="search_api_views_fulltext" class="search-input" type="text">
-          </form>
-          <a>
-            <img src="<?php print $images_path; ?>search.png" alt="<?php print t('Search'); ?>"/>
-          </a>
-          <div class="bottom-line"></div>
-        </li>
-        <li class="fb-likes">
-          <div class="fb-like fb-like-about" data-href="https://www.facebook.com/crihebrew?ref=bookmarks" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
-        </li>
-        <li class="youtube">
-          <a href="https://www.youtube.com/user/CRIHebrew" target="_blank">
-            <img src="<?php print $images_path; ?>youtube.png" alt="<?php print t('YouTube'); ?>"/>
-          </a>
-          <div class="bottom-line"></div>
-        </li>
-        <li class="fb">
-          <a href="https://www.facebook.com/crihebrew" target="_blank">
-            <img src="<?php print $images_path; ?>fb.png" alt="<?php print t('Facebook'); ?>"/>
-          </a>
-          <div class="bottom-line"></div>
-        </li>
-        <li class="text-link">
-          <a href="<?php print $base_url;?>about">
-            <?php print t('אודות'); ?>
-          </a>
-          <div class="bottom-line"></div>
-        </li>
-      </ul>
+<header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
+  <div class="container">
+    <div class="navbar-header">
+      <?php if ($logo): ?>
+      <a class="logo navbar-btn pull-left" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
+        <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+      </a>
+      <?php endif; ?>
+
+      <?php if (!empty($site_name)): ?>
+      <a class="name navbar-brand" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"><?php print $site_name; ?></a>
+      <?php endif; ?>
+
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
     </div>
 
-  </div>
-  <div class="row">
-    <div class="container">
-      <div class="col-lg-5 col-md-4 pull-right logo">
-        <a class="cri-logo" href="<?php print $base_url;?>"><img src="<?php print $images_path; ?>cri_logo.png" alt="<?php print t('logo'); ?>"/></a>
+    <?php if (!empty($primary_nav) || !empty($secondary_nav) || !empty($page['navigation'])): ?>
+      <div class="navbar-collapse collapse">
+        <nav role="navigation">
+          <?php if (!empty($primary_nav)): ?>
+            <?php print render($primary_nav); ?>
+          <?php endif; ?>
+          <?php if (!empty($secondary_nav)): ?>
+            <?php print render($secondary_nav); ?>
+          <?php endif; ?>
+          <?php if (!empty($page['navigation'])): ?>
+            <?php print render($page['navigation']); ?>
+          <?php endif; ?>
+        </nav>
       </div>
-    </div>
-  </div>
-  <div class="row main-nav">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-2 hidden-md hidden-sm hidden-xs"></div>
-        <div class="col-lg-7 col-sm-9 col-xs-6">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only"><?php print t('תפריט') ?></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          </div>
-          <div class="navbar-collapse collapse">
-            <nav role="navigation">
-              <?php print $menu; ?>
-            </nav>
-          </div>
-        </div>
-        <div class="col-sm-3 col-xs-6 homepage-title">
-        </div>
-      </div>
-    </div>
+    <?php endif; ?>
   </div>
 </header>
-<div class="row">
-  <div class="sidebar-container">
-      <div class="side front menu-invert">
-        <div class="panel panel-default" >
-          <div class="panel-heading" id="sidebar-head-front">
-          </div>
-          <div class="panel-body">
-            <ul>
-            </ul>
-          </div>
-          <div class="panel-footer">
-            <p><a href="#"><?php print t('הפינה הסינית'); ?></a></p>
-          </div>
-        </div>
-      </div>
-      <div class="side back">
-        <div class="panel panel-default" >
-          <div class="panel-heading" id="sidebar-head-back">
-          </div>
-          <div class="panel-body">
-            <ul>
-            </ul>
-          </div>
-          <div class="panel-footer">
-            <a class="flip"><?php print t('חזור'); ?> </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <?php print render($page['content']);  ?>
-</div>
-<div class="wrapper">
-  <div id="footer">
-    <?php print render($page['footer']); ?>
-  </div><script>
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '1379526082373635',
-        xfbml      : true,
-        version    : 'v2.3'
-      });
-    };
 
-    (function(d, s, id){
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script>
-  <div
-    class="fb-like"
-    data-share="true"
-    data-width="450"
-    data-show-faces="true">
+<div class="main-container container">
+
+  <header role="banner" id="page-header">
+    <?php if (!empty($site_slogan)): ?>
+      <p class="lead"><?php print $site_slogan; ?></p>
+    <?php endif; ?>
+
+    <?php print render($page['header']); ?>
+  </header> <!-- /#page-header -->
+
+  <div class="row">
+
+    <?php if (!empty($page['sidebar_first'])): ?>
+      <aside class="col-sm-3" role="complementary">
+        <?php print render($page['sidebar_first']); ?>
+      </aside>  <!-- /#sidebar-first -->
+    <?php endif; ?>
+
+    <section<?php print $content_column_class; ?>>
+      <?php if (!empty($page['highlighted'])): ?>
+        <div class="highlighted jumbotron"><?php print render($page['highlighted']); ?></div>
+      <?php endif; ?>
+      <?php if (!empty($breadcrumb)): print $breadcrumb; endif;?>
+      <a id="main-content"></a>
+      <?php print render($title_prefix); ?>
+      <?php if (!empty($title)): ?>
+        <h1 class="page-header"><?php print $title; ?></h1>
+      <?php endif; ?>
+      <?php print render($title_suffix); ?>
+      <?php print $messages; ?>
+      <?php if (!empty($tabs)): ?>
+        <?php print render($tabs); ?>
+      <?php endif; ?>
+      <?php if (!empty($page['help'])): ?>
+        <?php print render($page['help']); ?>
+      <?php endif; ?>
+      <?php if (!empty($action_links)): ?>
+        <ul class="action-links"><?php print render($action_links); ?></ul>
+      <?php endif; ?>
+      <?php print render($page['content']); ?>
+    </section>
+
+    <?php if (!empty($page['sidebar_second'])): ?>
+      <aside class="col-sm-3" role="complementary">
+        <?php print render($page['sidebar_second']); ?>
+      </aside>  <!-- /#sidebar-second -->
+    <?php endif; ?>
+
   </div>
 </div>
+<footer class="footer container">
+  <?php print render($page['footer']); ?>
+</footer>
