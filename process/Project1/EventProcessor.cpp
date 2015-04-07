@@ -5,22 +5,21 @@
 #include <regex>
 #include "tableStructs.h"
 #include "DatabaseConnection.h" 
+#include "EventProcessor.h"
+
 using namespace std;
 
-class EventProcessor
-{
-	rawEventEntry_t getNewEvent()					/*Get next event*/
+	rawEventEntry_t EventProcessor::getNewEvent()					
 	{
 		DatabaseConnection connection;
 		newEvent = connection.getNextRow();
 	}
-
-	int calculateScore ()						/*search for specific words and calc score*/ 
+	int EventProcessor::calculateScore()						 
 	{
 		string data = newEvent.data;
 		int score=0;
 		vector<corpusWord_t> words = getWords();
-		int size = words.size;
+		int size = words.size();
 
 		for (int i=0; i<size+1; i++)
 			{
@@ -29,7 +28,7 @@ class EventProcessor
 				if (std::regex_match (data, std::regex("(.*)([^à-ú]|^)"+word+"([^à-ú]|$)(.*)") ) && newEvent.userIdTo!=newEvent.userIdFrom)			
 				{
 					 score += words[i].score;
-					 newEvent.cat = event1.cat;
+					 event1.cat = words[i].cat;
 				}
 			}
 		if (score>0)
@@ -50,15 +49,13 @@ class EventProcessor
 		return (score);
 	}
 
-	int evaluateSeverity(int score)
+	int EventProcessor::evaluateSeverity(int score)
 	{
-		if (3>score>0) {event1.severity=1;}
-		if (5>score>2) {event1.severity=2;}
-		if (8>score>4) {event1.severity=3;}
-		if (score>7)   {event1.severity=4;}
-		event1.userIdTo = newEvent.eventId;
+		if (3>score>0) {event1.severity = 1;}
+		if (5>score>2) {event1.severity = 2;}
+		if (8>score>4) {event1.severity = 3;}
+		if (score>7)   {event1.severity = 4;}
+		event1.eventId = newEvent.eventId;
 		event1.userIdTo = newEvent.userIdTo;
 		event1.userIdFrom = newEvent.userIdFrom;
 	}
-}
-
