@@ -40,6 +40,7 @@ int DatabaseConnection::runRawQuery()
 	{
 		initResult();
 		result = mysql_store_result(con);
+		return ans;
 	}
 }
 
