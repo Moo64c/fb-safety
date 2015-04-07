@@ -63,7 +63,6 @@ DatabaseConnection::~DatabaseConnection()
 	initMySQLResult(raw_result);
 	initMySQLResult(word_result);
 	initMySQLResult(user_result);
-	free(con);
 }
 
 rawEventEntry_t DatabaseConnection::getNextRow()
@@ -115,7 +114,7 @@ vector<corpusWord_t> DatabaseConnection::getWords()
 	mysql_query(con, GET_WORDS_QUERY);
 	initMySQLResult(word_result);
 	word_result = mysql_store_result(con);
-	MYSQL_ROW row = mysql_fetch_row(word_result);
+	MYSQL_ROW row;
 	while ((row = mysql_fetch_row(word_result)))
 	{
 		corpusWord_t corpus_word;
@@ -124,11 +123,9 @@ vector<corpusWord_t> DatabaseConnection::getWords()
 		sprintf_s(buffer, "%s", row[0]);
 		corpus_word.cat = (category) atoi(buffer);
 
-		char buffer[200];
 		sprintf_s(buffer, "%s", row[1]);
 		corpus_word.word = buffer;
 
-		char buffer[200];
 		sprintf_s(buffer, "%s", row[2]);
 		corpus_word.score = atoi(buffer);
 
