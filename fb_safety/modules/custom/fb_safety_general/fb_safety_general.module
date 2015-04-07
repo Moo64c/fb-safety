@@ -5,3 +5,16 @@
  */
 
 include_once 'fb_safety_general.features.inc';
+
+
+function fb_safety_general_data_filter_number($data) {
+  return intval($data);
+}
+
+function fb_safety_general_data_filter_text($data) {
+  return $data;
+}
+
+function fb_safety_general_data_filter_from_id($data) {
+  return $data['id'];
+}

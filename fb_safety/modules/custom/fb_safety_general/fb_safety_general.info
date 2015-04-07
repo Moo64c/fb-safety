@@ -49,4 +49,17 @@ features[variable][] = node_preview_child
 features[variable][] = node_preview_event
 features[variable][] = node_submitted_child
 features[variable][] = node_submitted_event
+
+; Custom interfaces
+files[] = includes/interfaces/fb.parser.interface.inc
+files[] = includes/interfaces/fb.request.interface.inc
+
+; Custom classes.
+files[] = includes/classes/fb.json.manager.inc
+files[] = includes/classes/fb.parser.json.base.inc
+files[] = includes/classes/fb.parser.json.inbox.inc
+files[] = includes/classes/fb.requestor.json.inc
+files[] = includes/classes/fb.json.manager.inc
+
+
 mtime = 1428409588
