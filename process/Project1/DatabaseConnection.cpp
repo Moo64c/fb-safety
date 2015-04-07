@@ -100,5 +100,9 @@ rawEventEntry_t DatabaseConnection::getNextRow()
 
 time_t DatabaseConnection::getTime_t(char *timeStr)
 {
+	time_t res;
 
+	struct tm tmConnect = { 0 };
+	char * pc = strptime(timeStr, "%Y-%m-%d %H:%M:%S", &tmConnect);
+	res = mktime(&tmConnect);
 }

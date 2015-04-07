@@ -10,7 +10,9 @@ void testDatabaseConnection(){
 	printf("%d", dc.runRawQuery());
 }
 
-int main(){
+int main(int argc, char **argv){
+	string db;
+
 	testDatabaseConnection();
 
 	int i;
