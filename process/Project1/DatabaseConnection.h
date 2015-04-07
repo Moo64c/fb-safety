@@ -32,8 +32,11 @@ public:
 
 protected:
 	MYSQL *con;
+	MYSQL_RES *result;
 	string host;
 	string user;
 	string pass;
 	string db;
+
+	void initResult();
 };
