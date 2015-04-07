@@ -6,6 +6,8 @@ using namespace std;
 
 void testDatabaseConnection(){
 	DatabaseConnection dc;
+	printf("%d\n", dc.connect());
+	printf("%d", dc.runRawQuery());
 }
 
 int main(){

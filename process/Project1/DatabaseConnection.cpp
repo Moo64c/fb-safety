@@ -1,5 +1,10 @@
 #include "DatabaseConnection.h"
 
+const char* DatabaseConnection::DEFAULT_HOST = "localhost";
+const char* DatabaseConnection::DEFAULT_USER = "root";
+const char* DatabaseConnection::DEFAULT_PASSWORD = "qwerty";
+const char* DatabaseConnection::DEFAULT_DATABASE = "test";
+const char* DatabaseConnection::RAW_FACEBOOK_GET_NEW_ROWS_QUERY = "SELECT 1;";
 
 DatabaseConnection::DatabaseConnection(const char *_host, const char *_user,
 	const char *_pass, const char *_db) :
@@ -22,10 +27,15 @@ int DatabaseConnection::connect()
 	return 0;
 }
 
+int DatabaseConnection::runRawQuery()
+{
+	return mysql_query(con, RAW_FACEBOOK_GET_NEW_ROWS_QUERY);
+}
+
 
 DatabaseConnection::~DatabaseConnection()
 {
-
+	mysql_close(con);
 }
 
 rawEventEntry_t DatabaseConnection::getNextRow()

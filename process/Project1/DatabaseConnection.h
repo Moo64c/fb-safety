@@ -17,7 +17,7 @@ public:
 	vector<corpusWord_t> getWords();
 
 	int connect();
-	void runRawQuery();
+	int runRawQuery();
 
 	void setHost(const char *_newHost) { host = _newHost; }
 	void setUser(const char *_newUser) { user = _newUser; }
@@ -28,9 +28,9 @@ public:
 	static const char* DEFAULT_USER;
 	static const char* DEFAULT_PASSWORD;
 	static const char* DEFAULT_DATABASE;
+	static const char* RAW_FACEBOOK_GET_NEW_ROWS_QUERY;
 
 protected:
-	void runProc(char *proc);
 	MYSQL *con;
 	string host;
 	string user;
