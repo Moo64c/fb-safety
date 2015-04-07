@@ -26,6 +26,7 @@ struct rawEventEntry_t {
 	int likeAmount;
 	int commentAmount;
 	string data;
+	int row_id;
 };
 
 struct processedEvent_t {
@@ -34,6 +35,7 @@ struct processedEvent_t {
 	int eventId;
 	int severity;
 	category cat;
+	int row_id;
 };
 
 

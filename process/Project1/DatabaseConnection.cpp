@@ -6,7 +6,7 @@ const char* DatabaseConnection::DEFAULT_HOST = "localhost";
 const char* DatabaseConnection::DEFAULT_USER = "root";
 const char* DatabaseConnection::DEFAULT_PASSWORD = "qwerty";
 const char* DatabaseConnection::DEFAULT_DATABASE = "test";
-const char* DatabaseConnection::RAW_FACEBOOK_GET_NEW_ROWS_QUERY = "SELECT 1;";
+const char* DatabaseConnection::RAW_FACEBOOK_GET_NEW_ROWS_QUERY = "CALL `test`.`get_new_raw_data`();";
 
 DatabaseConnection::DatabaseConnection(const char *_host, const char *_user,
 	const char *_pass, const char *_db) :
@@ -61,34 +61,42 @@ DatabaseConnection::~DatabaseConnection()
 rawEventEntry_t DatabaseConnection::getNextRow()
 {
 	rawEventEntry_t res;
+	res.userIdFrom = 0;
+	res.userIdTo = 0;
+
 	if (result == 0)
 		return res;
 	MYSQL_ROW row = mysql_fetch_row(result);
 
 	if (row == 0)
+	{
 		return res;
+	}
 
 	char buffer[200];
-	sprintf(buffer, "%s", row[0]);
+	sprintf_s(buffer, "%s", row[0]);
 	res.userIdTo = atoi(buffer);
-	
-	sprintf(buffer, "%s", row[1]);
+
+	sprintf_s(buffer, "%s", row[1]);
 	res.userIdFrom = atoi(buffer);
 
-	sprintf(buffer, "%s", row[2]);
+	sprintf_s(buffer, "%s", row[2]);
 	res.eventId = atoi(buffer);
 
-	sprintf(buffer, "%s", row[3]);
+	sprintf_s(buffer, "%s", row[3]);
 	res.eventType = (event_type) atoi(buffer);
 
-	sprintf(buffer, "%s", row[4]);
+	sprintf_s(buffer, "%s", row[4]);
 	res.likeAmount = atoi(buffer);
 
-	sprintf(buffer, "%s", row[5]);
+	sprintf_s(buffer, "%s", row[5]);
 	res.commentAmount = atoi(buffer);
 
-	sprintf(buffer, "%s", row[6]);
-	res.data = string(buffer);
+	sprintf_s(buffer, "%s", row[6]);
+	res.data = buffer;
+
+	sprintf_s(buffer, "%s", row[7]);
+	res.row_id = atoi(buffer);
 
 	return res;
 }
