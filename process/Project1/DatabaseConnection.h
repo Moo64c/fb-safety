@@ -1,6 +1,7 @@
 #pragma once
-#include "tableStructs.cpp"
-#include 
+#include "tableStructs.h"
+#include "my_global.h"
+#include "mysql.h"
 #include <vector>
 
 class DatabaseConnection
@@ -17,4 +18,5 @@ public:
 
 protected:
 	void runProc(char *proc);
+	MYSQL *con;
 };
