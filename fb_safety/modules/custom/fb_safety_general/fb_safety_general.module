@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the FB Safety General feature.
+ */
+
+include_once 'fb_safety_general.features.inc';

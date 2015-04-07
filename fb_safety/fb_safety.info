@@ -56,3 +56,4 @@ dependencies[] = views_content
 dependencies[] = wysiwyg
 
 ; Custom modules
+dependencies[] = fb_safety_general
