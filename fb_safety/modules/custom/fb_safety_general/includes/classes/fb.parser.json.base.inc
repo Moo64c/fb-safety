@@ -38,6 +38,9 @@ abstract class FbParserJsonBase implements FbParserInterface {
     }
     $data = hiro_object_to_array($data);
     foreach($data['data'] as $rows) {
+      if (empty($rows['comments'])) {
+        continue;
+      }
       $rows = $rows['comments']['data'];
 
       // Convert the data to an array.
@@ -45,7 +48,9 @@ abstract class FbParserJsonBase implements FbParserInterface {
         $row_data = array();
         foreach($this->map as $key => $values) {
           // Use the header value to assign a field name.
-          $row_data[$values['field']] = $this->filter($values['filter'], $row[$key]);
+          if (!empty($row[$key])) {
+            $row_data[$values['field']] = $this->filter($values['filter'], $row[$key]);
+          }
         }
         $return_data[] = $row_data;
       }
