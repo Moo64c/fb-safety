@@ -26,8 +26,6 @@ struct rawEventEntry_t {
 	int likeAmount;
 	int commentAmount;
 	string data;
-	time_t createdTime;
-	time_t updatedTime;
 };
 
 struct processedEvent_t {

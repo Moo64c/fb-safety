@@ -14,6 +14,7 @@ public:
 	virtual ~DatabaseConnection();
 
 	rawEventEntry_t getNextRow();
+	userData_t getNextUserData();
 	vector<corpusWord_t> getWords();
 
 	int connect();
@@ -29,6 +30,7 @@ public:
 	static const char* DEFAULT_PASSWORD;
 	static const char* DEFAULT_DATABASE;
 	static const char* RAW_FACEBOOK_GET_NEW_ROWS_QUERY;
+	static const int NUMBER_OF_RAW_FIELDS;
 
 protected:
 	MYSQL *con;
@@ -39,4 +41,5 @@ protected:
 	string db;
 
 	void initResult();
+
 };

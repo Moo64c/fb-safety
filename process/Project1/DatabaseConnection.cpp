@@ -1,5 +1,6 @@
 #include "DatabaseConnection.h"
 #include <regex>
+#include "time.h"
 
 const char* DatabaseConnection::DEFAULT_HOST = "localhost";
 const char* DatabaseConnection::DEFAULT_USER = "root";
@@ -89,20 +90,6 @@ rawEventEntry_t DatabaseConnection::getNextRow()
 	sprintf(buffer, "%s", row[6]);
 	res.data = string(buffer);
 
-	sprintf(buffer, "%s", row[7]);
-	res.updatedTime = getTime_t(buffer);
-
-	sprintf(buffer, "%s", row[8]);
-	res.createdTime = getTime_t(buffer);
-
 	return res;
 }
 
-time_t DatabaseConnection::getTime_t(char *timeStr)
-{
-	time_t res;
-
-	struct tm tmConnect = { 0 };
-	char * pc = strptime(timeStr, "%Y-%m-%d %H:%M:%S", &tmConnect);
-	res = mktime(&tmConnect);
-}
