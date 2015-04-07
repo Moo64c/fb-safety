@@ -11,6 +11,17 @@ DatabaseConnection::DatabaseConnection(const char *_host, const char *_user,
 	con = mysql_init(NULL);
 }
 
+int DatabaseConnection::connect()
+{
+	if (mysql_real_connect(con, host.c_str(), user.c_str(), pass.c_str(),
+		db.c_str(), 0, NULL, 0) == NULL)
+	{
+		mysql_close(con);
+		return  mysql_errno(con);
+	}
+	return 0;
+}
+
 
 DatabaseConnection::~DatabaseConnection()
 {

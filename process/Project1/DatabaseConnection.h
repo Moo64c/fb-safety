@@ -16,7 +16,7 @@ public:
 	rawEventEntry_t getNextRow();
 	vector<corpusWord_t> getWords();
 
-	void connect();
+	int connect();
 	void runRawQuery();
 
 	void setHost(const char *_newHost) { host = _newHost; }
