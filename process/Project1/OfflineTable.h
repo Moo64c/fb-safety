@@ -1,0 +1,14 @@
+#pragma once
+#include "tableStructs.h"
+#include "DatabaseConnection.h"
+#include "my_global.h"
+
+class OfflineTable {
+public:
+	OfflineTable(DatabaseConnection);
+	virtual ~OfflineTable();
+
+protected:
+	bool check(userData_t);
+	void updateDB(userData_t);
+};

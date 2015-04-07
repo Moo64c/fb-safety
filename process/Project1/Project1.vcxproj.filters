@@ -18,11 +18,11 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tableStructs.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="DatabaseConnection.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tableStructs.h">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
