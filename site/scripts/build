@@ -10,7 +10,7 @@ cd $ROOT
 
 # Build the profile itself.
 (
-  cd fb_safety
+  cd site/fb_safety
   $DRUSH make --quiet --no-core --contrib-destination drupal-org.make .
   cd ..
 )
@@ -25,7 +25,8 @@ cd $ROOT
   fi
   chmod +w www/sites/* || true
   sudo rm -Rf www || true
-
+	
+echo "Building core"
   # Build core.
   $DRUSH make fb_safety/drupal-org-core.make www
 

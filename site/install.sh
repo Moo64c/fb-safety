@@ -21,12 +21,12 @@ bash scripts/build
 
 
 # Build the jekyll to get the compiled CSS files.
-cd jekyll
-bundle install
-sudo npm install
-bower install
-sudo grunt build
-cd ..
+#cd jekyll
+#bundle install
+#sudo npm install
+#bower install
+#sudo grunt build
+#cd ..
 
 # Copy the custom assets folders.
 mkdir fb_safety/libraries/fb_safety
