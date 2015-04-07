@@ -15,7 +15,8 @@ struct corpusWord_t{
 };
 
 struct rawEntry_t {
-	int userId;
+	int userIdTo;
+	int userIdFrom;
 	int eventId;
 	event_type eventType;
 	int likeAmount;
