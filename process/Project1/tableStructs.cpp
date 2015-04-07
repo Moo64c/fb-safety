@@ -33,6 +33,15 @@ struct processedEvent_t {
 	int userIdFrom;
 	int eventId;
 	int severity;
-	int popularity;
 	category cat;
+};
+
+
+struct userData_t {
+	int userId;
+	int maxUserIdFrom;
+	int numOfEvents;
+	int prevAverageSeverity;
+	int averageSeverity;
+	int frequency;
 };

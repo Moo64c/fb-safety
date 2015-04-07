@@ -1,5 +1,6 @@
 #pragma once
 #include "tableStructs.cpp"
+#include 
 #include <vector>
 
 class DatabaseConnection
