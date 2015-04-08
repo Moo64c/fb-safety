@@ -15,9 +15,9 @@ using namespace std;
 class EventProcessor
 {
 	public:
-		rawEventEntry_t getNewEvent(DatabaseConnection connection);
+		void getNewEvent(DatabaseConnection connection);
 		int calculateScore();
-		int evaluateSeverity(int score);
+		void evaluateSeverity(int score);
       
     private:
         rawEventEntry_t newEvent;

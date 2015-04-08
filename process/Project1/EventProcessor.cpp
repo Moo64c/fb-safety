@@ -9,7 +9,7 @@
 
 using namespace std;
 
-	rawEventEntry_t EventProcessor::getNewEvent(DatabaseConnection connection)					
+	void EventProcessor::getNewEvent(DatabaseConnection connection)					
 	{
 		newEvent = connection.getNextRow();
 	}
@@ -48,7 +48,7 @@ using namespace std;
 		return (score);
 	}
 
-	int EventProcessor::evaluateSeverity(int score)
+	void EventProcessor::evaluateSeverity(int score)
 	{
 		if (3>score && score>0) {event1.severity = 1;}
 		if (5>score && score>2) {event1.severity = 2;}
@@ -57,4 +57,5 @@ using namespace std;
 		event1.eventId = newEvent.eventId;
 		event1.userIdTo = newEvent.userIdTo;
 		event1.userIdFrom = newEvent.userIdFrom;
+		event1.row_id = newEvent.row_id;
 	}
