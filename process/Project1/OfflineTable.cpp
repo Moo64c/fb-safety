@@ -34,7 +34,7 @@ OfflineTable::~OfflineTable()
 
 }
 
-
+ 
 void OfflineTable::updateDB(struct userData_t)
 {
 
