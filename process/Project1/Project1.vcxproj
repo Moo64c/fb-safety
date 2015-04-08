@@ -127,7 +127,7 @@
   <ItemGroup>
     <ClCompile Include="DatabaseConnection.cpp" />
     <ClCompile Include="EventProcessor.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="fsMonitor_main.cpp" />
     <ClCompile Include="OfflineTable.cpp" />
     <ClCompile Include="tableStructs.h" />
   </ItemGroup>

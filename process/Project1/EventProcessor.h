@@ -15,7 +15,7 @@ using namespace std;
 class EventProcessor
 {
 	public:
-		void getNewEvent(DatabaseConnection connection);
+		void getNewEvent(DatabaseConnection &connection);
 		int calculateScore();
 		void evaluateSeverity(int score);
       

@@ -34,7 +34,7 @@ public:
 	static const int NUMBER_OF_RAW_FIELDS;
 
 protected:
-	MYSQL *con;
+	MYSQL *rawConn, *wordConn, *userConn;
 	MYSQL_RES *raw_result;
 	MYSQL_RES *word_result;
 	MYSQL_RES *user_result;
@@ -42,6 +42,7 @@ protected:
 	string user;
 	string pass;
 	string db;
+	vector<corpusWord_t> corpus;
 
 	void initMySQLResult(MYSQL_RES *res);
 
