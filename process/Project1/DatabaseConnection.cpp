@@ -68,12 +68,11 @@ void DatabaseConnection::initMySQLResult(MYSQL_RES *res)
 
 DatabaseConnection::~DatabaseConnection()
 {
-	mysql_close(rawConn);
-	mysql_close(wordConn);
+	/*mysql_close(rawConn);
 	mysql_close(userConn);
 	initMySQLResult(raw_result);
 	initMySQLResult(word_result);
-	initMySQLResult(user_result);
+	initMySQLResult(user_result);*/
 }
 
 rawEventEntry_t DatabaseConnection::getNextRow()
@@ -127,6 +126,7 @@ vector<corpusWord_t> DatabaseConnection::getWords()
 	initMySQLResult(word_result);
 	mysql_real_connect(wordConn, host.c_str(), user.c_str(), pass.c_str(),
 		db.c_str(), 0, NULL, 0);
+	mysql_set_character_set(wordConn, "utf8mb4");
 	mysql_query(wordConn, GET_WORDS_QUERY);
 	word_result = mysql_store_result(wordConn);
 	MYSQL_ROW row;
