@@ -13,8 +13,8 @@ OfflineTable::OfflineTable(DatabaseConnection &connection) {
 
 	while (data.userId != 0) {         //userID == 0 : row is NULL
 		processedEvent_t processed;
-		processed.createdTime = 0;
-		processed.updatedTime = 0;
+		processed.createdTime = "0";
+		processed.updatedTime = "0";
 		processed.userIdTo = data.userId;
 		processed.frequency = data.frequency;
 		processed.sticky = 1;
@@ -27,7 +27,7 @@ OfflineTable::OfflineTable(DatabaseConnection &connection) {
 		else {
 			processed.severity = 5;
 			processed.alert = 0;
-			processed.body = "Everything seems to be OK!";
+			processed.body = "Everything seems to be OK! :)";
 		}
 		connection.updateWebInterface(processed);
 		data = connection.getNextUserData();
