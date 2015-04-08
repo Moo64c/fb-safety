@@ -16,8 +16,10 @@ OfflineTable::OfflineTable(DatabaseConnection &connection) {
 		processedEvent_t processed;
 		time_t ltime;
 		time(&ltime);
-		processed.createdTime = ltime;
-		processed.updatedTime = ltime;
+		char t[100];
+		sprintf_s(t, "%d", ltime);
+		processed.createdTime = t;
+		processed.updatedTime = t;
 		processed.userIdTo = data.userId;
 		processed.frequency = data.frequency;
 		processed.sticky = 1;
