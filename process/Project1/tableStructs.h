@@ -43,8 +43,8 @@ struct userData_t {
 	int userId;
 	int maxUserIdFrom;
 	int numOfEvents;
-	int prevAverageSeverity;
-	int averageSeverity;
+	double prevAverageSeverity;
+	double averageSeverity;
 	int frequency;
 };
 #endif //PROCESSOR_DATA_TYPES

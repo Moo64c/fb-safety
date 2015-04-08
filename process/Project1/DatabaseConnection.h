@@ -19,6 +19,7 @@ public:
 
 	int connect();
 	int runRawQuery();
+	void runUsersQuery();
 
 	void setHost(const char *_newHost) { host = _newHost; }
 	void setUser(const char *_newUser) { user = _newUser; }
@@ -31,6 +32,7 @@ public:
 	static const char* DEFAULT_DATABASE;
 	static const char* RAW_FACEBOOK_GET_NEW_ROWS_QUERY;
 	static const char* GET_WORDS_QUERY;
+	static const char* GET_USER_DATA_QUERY;
 	static const int NUMBER_OF_RAW_FIELDS;
 
 protected:

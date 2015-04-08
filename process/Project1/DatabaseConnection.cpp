@@ -9,6 +9,7 @@ const char* DatabaseConnection::DEFAULT_PASSWORD = "qwerty";
 const char* DatabaseConnection::DEFAULT_DATABASE = "test";
 const char* DatabaseConnection::RAW_FACEBOOK_GET_NEW_ROWS_QUERY = "CALL `test`.`get_new_raw_data`();";
 const char* DatabaseConnection::GET_WORDS_QUERY = "CALL `test`.`get_words`()";
+const char* DatabaseConnection::GET_USER_DATA_QUERY = "call `test`.`get_user_processed_data_week`();";
 
 DatabaseConnection::DatabaseConnection(const char *_host, const char *_user,
 	const char *_pass, const char *_db) :
@@ -31,8 +32,6 @@ DatabaseConnection::DatabaseConnection(const char *_host, const char *_user,
 int DatabaseConnection::connect()
 {
 	if (mysql_real_connect(rawConn, host.c_str(), user.c_str(), pass.c_str(),
-		db.c_str(), 0, NULL, 0) == NULL ||
-		mysql_real_connect(userConn, host.c_str(), user.c_str(), pass.c_str(),
 		db.c_str(), 0, NULL, 0) == NULL)
 	{
 		mysql_close(rawConn);
@@ -90,7 +89,7 @@ rawEventEntry_t DatabaseConnection::getNextRow()
 		return res;
 	}
 
-	char buffer[200];
+	char buffer[1600];
 	sprintf_s(buffer, "%s", row[0]);
 	res.userIdTo = atoi(buffer);
 
@@ -152,7 +151,50 @@ vector<corpusWord_t> DatabaseConnection::getWords()
 
 userData_t DatabaseConnection::getNextUserData()
 {
-	userData_t ans = {};
-	return ans;
+	userData_t res;
+	res.userId = 0;
+	if (user_result == 0)
+	{
+		runUsersQuery();
+	}
+	MYSQL_ROW row = mysql_fetch_row(user_result);
+
+	if (row == 0)
+	{
+		return res;
+	}
+
+	char buffer[1600];
+	sprintf_s(buffer, "%s", row[0]);
+	res.userId = atoi(buffer);
+
+	sprintf_s(buffer, "%s", row[1]);
+	res.maxUserIdFrom = atoi(buffer);
+
+	sprintf_s(buffer, "%s", row[6]);
+	res.numOfEvents = atoi(buffer);
+
+	sprintf_s(buffer, "%s", row[5]);
+	int prevNumOfEvents = atoi(buffer) - res.numOfEvents;
+	
+	sprintf_s(buffer, "%s", row[4]);
+	double sumSeverity = atof(buffer);
+
+	sprintf_s(buffer, "%s", row[3]);
+	double prevSumSeverity = atof(buffer) - sumSeverity;
+
+	res.averageSeverity = (res.numOfEvents == 0) ? 0 : sumSeverity / res.numOfEvents;
+	res.prevAverageSeverity = (prevNumOfEvents == 0) ? 0 : prevSumSeverity / prevNumOfEvents;
+
+	return res;
+}
+
+void DatabaseConnection::runUsersQuery()
+{
+	mysql_real_connect(userConn, host.c_str(), user.c_str(), pass.c_str(),
+		db.c_str(), 0, NULL, 0);
+	mysql_query(userConn, GET_USER_DATA_QUERY);
+	initMySQLResult(user_result);
+	user_result = mysql_store_result(userConn);
 }
 
