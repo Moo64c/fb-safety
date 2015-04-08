@@ -12,24 +12,24 @@ OfflineTable::OfflineTable(DatabaseConnection &connection) {
 	userData_t data = connection.getNextUserData();
 
 	while (data.userId != 0) {         //userID == 0 : row is NULL
-		processedEvent_t procceced_data;
-		procceced_data.createdTime = 0;
-		procceced_data.updatedTime = 0;
-		procceced_data.userIdTo = data.userId;
-		procceced_data.frequency = data.frequency;
-		procceced_data.sticky = 1;
-		procceced_data.title = "Weekly Status";
+		processedEvent_t processed;
+		processed.createdTime = 0;
+		processed.updatedTime = 0;
+		processed.userIdTo = data.userId;
+		processed.frequency = data.frequency;
+		processed.sticky = 1;
+		processed.title = "Weekly Status";
 		if (check(data)) {
-			procceced_data.severity = 5;
-			procceced_data.alert = 1;
-			procceced_data.body = "Unusual activity detected";
+			processed.severity = 4;
+			processed.alert = 1;
+			processed.body = "Unusual activity detected";
 		}
 		else {
-			procceced_data.severity = 0;
-			procceced_data.alert = 0;
-			procceced_data.body = "Everything seems to be OK!";
+			processed.severity = 5;
+			processed.alert = 0;
+			processed.body = "Everything seems to be OK!";
 		}
-		connection.updateWebInterface(procceced_data);
+		connection.updateWebInterface(processed);
 		data = connection.getNextUserData();
 	}
 }
