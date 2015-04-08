@@ -1,0 +1,36 @@
+<?php
+/**
+ * @file
+ * Code for the FB Safety General feature installation.
+ */
+
+function fb_safety_general_schema() {
+  $schema['raw_facebook_event'] = array(
+    'description' => 'Table for raw facebook data',
+    'fields' => array(
+      'row_id'        => array('type' => 'serial', 'not null' => TRUE),
+      'event_id'      => array('type' => 'varchar', 'length' => 100, 'not null' => TRUE),
+      'user_id_to'    => array('type' => 'varchar', 'length' => 100, 'not null' => TRUE),
+      'user_id_from'  => array('type' => 'varchar', 'length' => 100, 'not null' => TRUE),
+      'event_type'    => array('type' => 'varchar', 'length' => 100, 'not null' => TRUE),
+      'created_time'  => array('type' => 'int', 'values' => 20),
+      'updated_time'  => array('type' => "int"),
+      'likeAmount'    => array('type' => 'int'),
+      'commentAmount' => array('type' => 'int'),
+      'data'          => array('type' => 'text', 'collation' => 'utf8mb4_bin'),
+      'severity'      => array('type' => 'int'),
+      'category'      => array('type' => 'int'),
+    ),
+
+    'primary key' => array('row_id', 'user_id_to'),
+    'indexes' => array(
+      'user_id_to_idx' => array('user_id_to'),
+      'user_id_from_idx' => array('user_id_from'),
+      'created_date_idx'   => array('created_time'),
+      'updated_date_idx' => array('updated_time'),
+    ),
+    'mysql_character_set' => 'utf8mb4',
+  );
+
+  return $schema;
+}

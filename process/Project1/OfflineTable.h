@@ -5,10 +5,11 @@
 
 class OfflineTable {
 public:
-	OfflineTable(DatabaseConnection);
+	OfflineTable(DatabaseConnection &connection);
 	virtual ~OfflineTable();
 
 protected:
 	bool check(userData_t);
 	void updateDB(userData_t);
+	bool change(double curr, double prev);
 };

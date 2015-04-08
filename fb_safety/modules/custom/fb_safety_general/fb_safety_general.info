@@ -4,9 +4,11 @@ package = Features
 version = 7.x-1.0
 project = fb_safety_general
 dependencies[] = ctools
+dependencies[] = date
 dependencies[] = entityreference
 dependencies[] = features
 dependencies[] = filter
+dependencies[] = number
 dependencies[] = options
 dependencies[] = strongarm
 dependencies[] = taxonomy
@@ -17,18 +19,24 @@ features[field_base][] = body
 features[field_base][] = field_events
 features[field_base][] = field_frequency
 features[field_base][] = field_friends
+features[field_base][] = field_last_update
 features[field_base][] = field_options
 features[field_base][] = field_popularity
 features[field_base][] = field_severity
+features[field_base][] = field_severity_weight
+features[field_base][] = field_unique_id
 features[field_base][] = message_text
 features[field_instance][] = node-child-body
 features[field_instance][] = node-child-field_events
 features[field_instance][] = node-child-field_friends
+features[field_instance][] = node-child-field_last_update
 features[field_instance][] = node-child-field_options
+features[field_instance][] = node-child-field_unique_id
 features[field_instance][] = node-event-body
 features[field_instance][] = node-event-field_frequency
 features[field_instance][] = node-event-field_popularity
 features[field_instance][] = node-event-field_severity
+features[field_instance][] = node-event-field_severity_weight
 features[filter][] = filtered_html
 features[filter][] = full_html
 features[filter][] = plain_text
@@ -49,17 +57,14 @@ features[variable][] = node_preview_child
 features[variable][] = node_preview_event
 features[variable][] = node_submitted_child
 features[variable][] = node_submitted_event
-
-; Custom interfaces
 files[] = includes/interfaces/fb.parser.interface.inc
 files[] = includes/interfaces/fb.request.interface.inc
-
-; Custom classes.
 files[] = includes/classes/fb.json.manager.inc
 files[] = includes/classes/fb.parser.json.base.inc
 files[] = includes/classes/fb.parser.json.inbox.inc
+files[] = includes/classes/fb.parser.json.feed.inc
+files[] = includes/classes/fb.parser.json.notification.inc
 files[] = includes/classes/fb.requestor.json.inc
 files[] = includes/classes/fb.json.manager.inc
-
-
-mtime = 1428409588
+files[] = includes/classes/fb.raw.data.pusher.inc
+mtime = 1428499817
