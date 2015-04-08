@@ -13,7 +13,7 @@ const char* DatabaseConnection::GET_USER_DATA_QUERY = "call `test`.`get_user_pro
 const char* DatabaseConnection::UPDATE_RAW_TABLE_QUERY = "call `test`.`update_raw_row`(%d, %d, %d);";
 
 DatabaseConnection::DatabaseConnection(const char *_host, const char *_user,
-	const char *_pass, const char *_db) :
+	const char *_pass, const char *_db, bool _verbosity) :
 	rawConn(0),
 	wordConn(0),
 	userConn(0),
@@ -23,7 +23,8 @@ DatabaseConnection::DatabaseConnection(const char *_host, const char *_user,
 	host(_host),
 	user(_user),
 	pass(_pass),
-	db(_db)
+	db(_db),
+	verbose(_verbosity)
 {
 	rawConn = mysql_init(NULL);
 	wordConn = mysql_init(NULL);
