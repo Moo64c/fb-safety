@@ -137,7 +137,6 @@ vector<corpusWord_t> DatabaseConnection::getWords()
 userData_t DatabaseConnection::getNextUserData()
 {
 	userData_t ans;
-	std::cout << "";
 	return ans;
 }
 
