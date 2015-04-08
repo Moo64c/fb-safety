@@ -15,13 +15,14 @@ using namespace std;
 class EventProcessor
 {
 	public:
-		void getNewEvent(DatabaseConnection &connection);
+		EventProcessor(DatabaseConnection *connection);
+		void getNewEvent();
 		int calculateScore();
 		void evaluateSeverity(int score);
       
     private:
         rawEventEntry_t newEvent;
         processedEvent_t event1;
-		DatabaseConnection connection;
+		DatabaseConnection *connection;
 
 };

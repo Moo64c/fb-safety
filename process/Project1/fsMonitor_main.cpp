@@ -12,8 +12,8 @@ using namespace std;
 
 void eventProcessor(DatabaseConnection connection)
 {
-	EventProcessor EP;
-	EP.getNewEvent(connection);
+	EventProcessor EP(&connection);
+	EP.getNewEvent();
 	printf("Calculating event score...\n");
 	int i_score = EP.calculateScore();
 	cout << "score calculated:" << i_score << "\n";
@@ -56,4 +56,6 @@ int main (int argc, char **argv)
 	connection.connect();
 	eventProcessor(connection);
 	offlineTable(connection);
+	int i;
+	cin >> i;
 }

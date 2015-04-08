@@ -9,21 +9,26 @@
 
 using namespace std;
 
-	void EventProcessor::getNewEvent(DatabaseConnection &connection)					
+	EventProcessor::EventProcessor(DatabaseConnection *_connection):
+		connection(_connection)
 	{
-		newEvent = connection.getNextRow();
+
+	}
+
+	void EventProcessor::getNewEvent()
+	{
+		newEvent = connection->getNextRow();
 	}
 	int EventProcessor::calculateScore()						 
 	{
 		string data = newEvent.data;
 		int score=0;
-		vector<corpusWord_t> words = connection.getWords();
+		vector<corpusWord_t> words = connection->getWords();
 		int size = (int) words.size();
 
 		for (int i=0; i<size; i++)
 			{
 				string word = words[i].word;
-				std::size_t found = data.find(word);
 				if (std::regex_match(data, std::regex("(.*)([^à-ú]|^)" + word + "([^à-ú]|$)(.*)")) && newEvent.userIdTo != newEvent.userIdFrom && std::regex_match(data, std::regex("(.*)([^a-z]|^)" + word + "([^a-z]|$)(.*)")))
 				{
 					 score += words[i].score;
@@ -58,6 +63,5 @@ using namespace std;
 		event1.userIdTo = newEvent.userIdTo;
 		event1.userIdFrom = newEvent.userIdFrom;
 		event1.row_id = newEvent.row_id;
-		DatabaseConnection DC;
-		DC.updateRawDB(event1);
+		connection->updateRawDB(event1);
 	}
