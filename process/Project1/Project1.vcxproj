@@ -126,11 +126,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DatabaseConnection.cpp" />
+    <ClCompile Include="EventProcessor.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="tableStructs.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DatabaseConnection.h" />
+    <ClInclude Include="EventProcessor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

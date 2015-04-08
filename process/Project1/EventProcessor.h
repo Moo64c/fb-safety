@@ -18,4 +18,10 @@ class EventProcessor
 		rawEventEntry_t getNewEvent();
 		int calculateScore();
 		int evaluateSeverity(int score);
+        
+    private:
+        rawEventEntry_t newEvent;
+        processedEvent_t event1;
+		DatabaseConnection connection;
+
 };

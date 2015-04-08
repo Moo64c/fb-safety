@@ -24,9 +24,15 @@
     <ClCompile Include="tableStructs.h">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="EventProcessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DatabaseConnection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventProcessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
