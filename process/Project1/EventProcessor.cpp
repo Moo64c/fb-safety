@@ -29,7 +29,7 @@ using namespace std;
 		for (int i=0; i<size; i++)
 			{
 				string word = words[i].word;
-				if (std::regex_match(data, std::regex("(.*)([^à-ú]|^)" + word + "([^à-ú]|$)(.*)")) && newEvent.userIdTo != newEvent.userIdFrom && std::regex_match(data, std::regex("(.*)([^a-z]|^)" + word + "([^a-z]|$)(.*)")))
+				if (std::regex_match(data, std::regex("(.*)([é]|[ä]|[^à-ú]|^)" + word + "([^à-ú]|$)(.*)")) && newEvent.userIdTo != newEvent.userIdFrom && std::regex_match(data, std::regex("(.*)([^a-z]|^)" + word + "([^a-z]|$)(.*)")))
 				{
 					 score += words[i].score;
 					 event1.cat = words[i].cat;
