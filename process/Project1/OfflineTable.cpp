@@ -13,6 +13,7 @@ OfflineTable::OfflineTable(DatabaseConnection &connection) {
 	userData_t data = connection.getNextUserData();
 	while (data.userId != 0) {         //userID == 0 : row is NULL
 		if (check(data))
+			printf("found unusual activity, reporting...");
 			updateDB (data);
 		data = connection.getNextUserData();
 	}
