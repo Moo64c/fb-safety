@@ -9,7 +9,7 @@
 
 using namespace std;
 
-	rawEventEntry_t EventProcessor::getNewEvent()					
+	rawEventEntry_t EventProcessor::getNewEvent(DatabaseConnection connection)					
 	{
 		newEvent = connection.getNextRow();
 	}
