@@ -32,12 +32,14 @@ struct rawEventEntry_t {
 };
 
 struct processedEvent_t {
+	int updatedTime;
+	int createdTime;
 	int userIdTo;
 	int severity;
-	int popularity;
 	int frequency;
-	category cat;
+	int sticky;
 	int row_id;
+	category cat;
 	string title;
 	string body;
 };
