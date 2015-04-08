@@ -18,3 +18,7 @@ function fb_safety_general_data_filter_text($data) {
 function fb_safety_general_data_filter_from_id($data) {
   return $data['id'];
 }
+
+function fb_safety_general_data_filter_time($data) {
+  return strtotime($data);
+}

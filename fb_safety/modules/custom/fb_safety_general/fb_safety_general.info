@@ -60,6 +60,6 @@ files[] = includes/classes/fb.parser.json.base.inc
 files[] = includes/classes/fb.parser.json.inbox.inc
 files[] = includes/classes/fb.requestor.json.inc
 files[] = includes/classes/fb.json.manager.inc
-
+files[] = includes/classes/fb.raw.data.pusher.inc
 
 mtime = 1428409588

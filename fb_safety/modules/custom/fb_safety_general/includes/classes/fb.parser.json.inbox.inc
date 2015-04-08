@@ -20,20 +20,25 @@ class FbParserJsonInbox extends FbParserJsonBase {
   protected function map() {
     return array(
       'id' => array(
-        'field' => 'id_id',
+        'field' => 'event_id',
         "filter" => "text",
       ),
       'from' => array(
-        'field' => 'from_id',
+        'field' => 'user_id_from',
         "filter" => "from_id",
       ),
       'message' => array(
-        'field' => 'content',
+        'field' => 'data',
         "filter" => "text",
       ),
       'created_time' => array(
         'field' => 'created_time',
-        "filter" => "number",
+        "filter" => "time",
+      ),
+      'event_type' => array(
+        'field' => 'event_type',
+        'filter' => 'force_value',
+        'value' => 'PRIVATE_MESSAGE_EVENT_TYPE',
       ),
     );
   }
