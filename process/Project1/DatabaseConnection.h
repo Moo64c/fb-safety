@@ -10,10 +10,11 @@ class DatabaseConnection
 {
 public:
 	DatabaseConnection(const char *_host = DEFAULT_HOST, const char *_user = DEFAULT_USER,
-		const char *_pass = DEFAULT_PASSWORD, const char *_db = DEFAULT_DATABASE);
+		const char *_pass = DEFAULT_PASSWORD, const char *_db = DEFAULT_DATABASE, bool _verbosity = false);
 	virtual ~DatabaseConnection();
 
 	rawEventEntry_t getNextRow();
+	void updateRawDB(processedEvent_t processed);
 	userData_t getNextUserData();
 	vector<corpusWord_t> getWords();
 
@@ -25,6 +26,7 @@ public:
 	void setUser(const char *_newUser) { user = _newUser; }
 	void setPass(const char *_newPass) { pass = _newPass; }
 	void setDB(const char *_newDB) { db = _newDB; }
+	void setVerbose(bool _newVerbosity) { verbose = _newVerbosity; }
 
 	static const char* DEFAULT_HOST;
 	static const char* DEFAULT_USER;
@@ -33,10 +35,11 @@ public:
 	static const char* RAW_FACEBOOK_GET_NEW_ROWS_QUERY;
 	static const char* GET_WORDS_QUERY;
 	static const char* GET_USER_DATA_QUERY;
+	static const char* UPDATE_RAW_TABLE_QUERY;
 	static const int NUMBER_OF_RAW_FIELDS;
 
 protected:
-	MYSQL *rawConn, *wordConn, *userConn;
+	MYSQL *rawConn, *wordConn, *userConn, *updateConn;
 	MYSQL_RES *raw_result;
 	MYSQL_RES *word_result;
 	MYSQL_RES *user_result;
@@ -45,7 +48,10 @@ protected:
 	string pass;
 	string db;
 	vector<corpusWord_t> corpus;
+	bool verbose;
 
 	void initMySQLResult(MYSQL_RES *res);
+	
+	event_type getEventType(const char *eventText);
 
 };

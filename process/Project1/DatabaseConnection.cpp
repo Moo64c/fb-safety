@@ -6,13 +6,14 @@
 const char* DatabaseConnection::DEFAULT_HOST = "localhost";
 const char* DatabaseConnection::DEFAULT_USER = "root";
 const char* DatabaseConnection::DEFAULT_PASSWORD = "qwerty";
-const char* DatabaseConnection::DEFAULT_DATABASE = "test";
-const char* DatabaseConnection::RAW_FACEBOOK_GET_NEW_ROWS_QUERY = "CALL `test`.`get_new_raw_data`();";
-const char* DatabaseConnection::GET_WORDS_QUERY = "CALL `test`.`get_words`()";
-const char* DatabaseConnection::GET_USER_DATA_QUERY = "call `test`.`get_user_processed_data_week`();";
+const char* DatabaseConnection::DEFAULT_DATABASE = "fb_safety";
+const char* DatabaseConnection::RAW_FACEBOOK_GET_NEW_ROWS_QUERY = "CALL `get_new_raw_data`();";
+const char* DatabaseConnection::GET_WORDS_QUERY = "CALL `get_words`()";
+const char* DatabaseConnection::GET_USER_DATA_QUERY = "call `get_user_processed_data_week`();";
+const char* DatabaseConnection::UPDATE_RAW_TABLE_QUERY = "call update_raw_row(%d, %d, %d);";
 
 DatabaseConnection::DatabaseConnection(const char *_host, const char *_user,
-	const char *_pass, const char *_db) :
+	const char *_pass, const char *_db, bool _verbosity) :
 	rawConn(0),
 	wordConn(0),
 	userConn(0),
@@ -22,21 +23,24 @@ DatabaseConnection::DatabaseConnection(const char *_host, const char *_user,
 	host(_host),
 	user(_user),
 	pass(_pass),
-	db(_db)
+	db(_db),
+	verbose(_verbosity)
 {
 	rawConn = mysql_init(NULL);
 	wordConn = mysql_init(NULL);
 	userConn = mysql_init(NULL);
+	updateConn = mysql_init(NULL);
 }
 
 int DatabaseConnection::connect()
 {
 	if (mysql_real_connect(rawConn, host.c_str(), user.c_str(), pass.c_str(),
+		db.c_str(), 0, NULL, 0) == NULL ||
+		mysql_real_connect(updateConn, host.c_str(), user.c_str(), pass.c_str(),
 		db.c_str(), 0, NULL, 0) == NULL)
 	{
 		mysql_close(rawConn);
-		mysql_close(wordConn);
-		mysql_close(userConn);
+		mysql_close(updateConn);
 		return  99;
 	}
 	return 0;
@@ -67,11 +71,7 @@ void DatabaseConnection::initMySQLResult(MYSQL_RES *res)
 
 DatabaseConnection::~DatabaseConnection()
 {
-	/*mysql_close(rawConn);
-	mysql_close(userConn);
-	initMySQLResult(raw_result);
-	initMySQLResult(word_result);
-	initMySQLResult(user_result);*/
+
 }
 
 rawEventEntry_t DatabaseConnection::getNextRow()
@@ -83,6 +83,7 @@ rawEventEntry_t DatabaseConnection::getNextRow()
 	if (raw_result == 0)
 		runRawQuery();
 	MYSQL_ROW row = mysql_fetch_row(raw_result);
+
 
 	if (row == 0)
 	{
@@ -100,7 +101,7 @@ rawEventEntry_t DatabaseConnection::getNextRow()
 	res.eventId = atoi(buffer);
 
 	sprintf_s(buffer, "%s", row[3]);
-	res.eventType = (event_type) atoi(buffer);
+	res.eventType = getEventType(buffer);
 
 	sprintf_s(buffer, "%s", row[4]);
 	res.likeAmount = atoi(buffer);
@@ -198,3 +199,25 @@ void DatabaseConnection::runUsersQuery()
 	user_result = mysql_store_result(userConn);
 }
 
+void DatabaseConnection::updateRawDB(processedEvent_t processed)
+{
+	char buffer[200];
+	sprintf_s(buffer, UPDATE_RAW_TABLE_QUERY, processed.row_id, processed.severity, processed.cat);
+	mysql_query(updateConn, buffer);
+}
+
+event_type DatabaseConnection::getEventType(const char *eventText)
+{
+	if (strcmp(eventText, "STATUS_EVENT_TYPE") == 0)
+		return STATUS_EVENT_TYPE;
+	if (strcmp(eventText, "COMMENT_EVENT_TYPE") == 0)
+		return COMMENT_EVENT_TYPE;
+	if (strcmp(eventText, "PHOTO_EVENT_TYPE") == 0)
+		return PHOTO_EVENT_TYPE;
+	if (strcmp(eventText, "PRIVATE_MESSAGE_EVENT_TYPE") == 0)
+		return PRIVATE_MESSAGE_EVENT_TYPE;
+	if (strcmp(eventText, "LINK_EVENT_TYPE") == 0)
+		return LINK_EVENT_TYPE;
+
+	return OTHER_EVENT_TYPE;
+}
