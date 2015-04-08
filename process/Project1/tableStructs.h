@@ -19,25 +19,25 @@ struct corpusWord_t{
 };
 
 struct rawEventEntry_t {
-	int userIdTo;
-	int userIdFrom;
+	string userIdTo;
+	string userIdFrom;
 	string eventId;
 	event_type eventType;
 	int likeAmount;
 	int commentAmount;
 	string data;
 	int row_id;
-	int updatedTime;
-	int createdTime;
+	string updatedTime;
+	string createdTime;
 };
 
 struct processedEvent_t {
-	int updatedTime;
-	int createdTime;
-	int userIdTo;
+	string updatedTime;
+	string createdTime;
+	string userIdTo;
 	int severity;
 	int frequency;
-	int sticky;
+	int sticky;//0 or 1
 	int alert;//0 or 1
 	int row_id;
 	category cat;
@@ -47,8 +47,8 @@ struct processedEvent_t {
 
 
 struct userData_t {
-	int userId;
-	int maxUserIdFrom;
+	string userId;
+	string maxUserIdFrom;
 	int numOfEvents;
 	double prevAverageSeverity;
 	double averageSeverity;

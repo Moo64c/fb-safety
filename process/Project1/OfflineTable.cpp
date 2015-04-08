@@ -30,7 +30,7 @@ OfflineTable::OfflineTable(DatabaseConnection &connection) {
 		else {
 			processed.severity = 5;
 			processed.alert = 0;
-			processed.body = "Everything seems to be OK!";
+			processed.body = "Everything seems to be OK! :)";
 		}
 		connection.updateWebInterface(processed);
 		data = connection.getNextUserData();
