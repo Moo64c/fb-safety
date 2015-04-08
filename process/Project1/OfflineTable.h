@@ -11,5 +11,5 @@ public:
 protected:
 	bool check(userData_t);
 	void updateDB(userData_t);
-	bool change(int curr, int prev);
+	bool change(double curr, double prev);
 };

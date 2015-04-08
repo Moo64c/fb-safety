@@ -27,15 +27,21 @@ struct rawEventEntry_t {
 	int commentAmount;
 	string data;
 	int row_id;
+	int updatedTime;
+	int createdTime;
 };
 
 struct processedEvent_t {
+	int updatedTime;
+	int createdTime;
 	int userIdTo;
-	int userIdFrom;
-	string eventId;
 	int severity;
-	category cat;
+	int frequency;
+	int sticky;
 	int row_id;
+	category cat;
+	string title;
+	string body;
 };
 
 

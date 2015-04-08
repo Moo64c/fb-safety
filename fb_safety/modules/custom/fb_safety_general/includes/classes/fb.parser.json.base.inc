@@ -23,38 +23,20 @@ abstract class FbParserJsonBase implements FbParserInterface {
    * Array of the parse information that fit the field schema.
    */
   public function extractData($data_string, $nid = NULL) {
-    $return_data = array();
     // Reset error status.
     $this->hasError = FALSE;
     // Decodes to arrays instead of classes as in json_decode().
     if (!$data = json_decode($data_string)) {
       $this->hasError = TRUE;
-      return $return_data;
+      return;
     }
 
     // Check for errors and problems in the data.
     if ($this->checkError($data, $nid)) {
-      return $return_data;
+      return;
     }
     $data = hiro_object_to_array($data);
-    foreach($data['data'] as $rows) {
-      if (empty($rows['comments'])) {
-        continue;
-      }
-      $rows = $rows['comments']['data'];
-
-      // Convert the data to an array.
-      foreach($rows as $row) {
-        $row_data = array();
-        foreach($this->map as $key => $values) {
-          // Use the header value to assign a field name.
-          $row_data[$values['field']] =  $this->filter($values, !empty($row[$key]) ? $row[$key] : "");
-        }
-        $return_data[] = $row_data;
-      }
-    }
-
-    return $return_data;
+    return $data;
   }
 
   /**
@@ -76,7 +58,9 @@ abstract class FbParserJsonBase implements FbParserInterface {
     if ($filter == "force_value") {
       return $filter_type['value'];
     }
-    return function_exists($function_name) ? check_plain($function_name($data)) : check_plain($data);
+    $return_value = function_exists($function_name) ? $function_name($data) : $data;
+    return is_array($return_value) ? $return_value : check_plain($return_value);
+
   }
 
   /**
