@@ -24,7 +24,7 @@ using namespace std;
 			{
 				string word = words[i].word;
 				std::size_t found = data.find(word);
-				if (std::regex_match (data, std::regex("(.*)([^à-ú]|^)"+word+"([^à-ú]|$)(.*)") ) && newEvent.userIdTo!=newEvent.userIdFrom)			
+				if (std::regex_match(data, std::regex("(.*)([^à-ú]|^)" + word + "([^à-ú]|$)(.*)")) && newEvent.userIdTo != newEvent.userIdFrom && std::regex_match(data, std::regex("(.*)([^a-z]|^)" + word + "([^a-z]|$)(.*)")))
 				{
 					 score += words[i].score;
 					 event1.cat = words[i].cat;
