@@ -32,11 +32,11 @@ using namespace std;
 			}
 		if (score>0)
 		{
-			if (5>newEvent.likeAmount+newEvent.commentAmount>1)
+			if (5>newEvent.likeAmount+newEvent.commentAmount && newEvent.likeAmount+newEvent.commentAmount>1)
 			{
 				score+=1;
 			}
-			if (10>newEvent.likeAmount+newEvent.commentAmount>5)
+			if (10>newEvent.likeAmount+newEvent.commentAmount && newEvent.likeAmount+newEvent.commentAmount>5)
 			{
 				score+=2;
 			}
@@ -50,9 +50,9 @@ using namespace std;
 
 	int EventProcessor::evaluateSeverity(int score)
 	{
-		if (3>score>0) {event1.severity = 1;}
-		if (5>score>2) {event1.severity = 2;}
-		if (8>score>4) {event1.severity = 3;}
+		if (3>score && score>0) {event1.severity = 1;}
+		if (5>score && score>2) {event1.severity = 2;}
+		if (8>score && score>4) {event1.severity = 3;}
 		if (score>7)   {event1.severity = 4;}
 		event1.eventId = newEvent.eventId;
 		event1.userIdTo = newEvent.userIdTo;
