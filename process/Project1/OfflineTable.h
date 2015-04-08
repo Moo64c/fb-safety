@@ -5,7 +5,7 @@
 
 class OfflineTable {
 public:
-	OfflineTable(DatabaseConnection);
+	OfflineTable(DatabaseConnection &connection);
 	virtual ~OfflineTable();
 
 protected:

@@ -68,11 +68,7 @@ void DatabaseConnection::initMySQLResult(MYSQL_RES *res)
 
 DatabaseConnection::~DatabaseConnection()
 {
-	/*mysql_close(rawConn);
-	mysql_close(userConn);
-	initMySQLResult(raw_result);
-	initMySQLResult(word_result);
-	initMySQLResult(user_result);*/
+
 }
 
 rawEventEntry_t DatabaseConnection::getNextRow()
