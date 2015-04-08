@@ -48,7 +48,6 @@ int main (int argc, char **argv)
 	}
 	DatabaseConnection connection(host, user, password, database);
 	connection.connect();
-	connection.runRawQuery();
 	eventProcessor(connection);
 	offlineTable(connection);
 }

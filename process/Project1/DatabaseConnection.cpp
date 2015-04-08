@@ -82,7 +82,7 @@ rawEventEntry_t DatabaseConnection::getNextRow()
 	res.userIdTo = 0;
 
 	if (raw_result == 0)
-		return res;
+		runRawQuery();
 	MYSQL_ROW row = mysql_fetch_row(raw_result);
 
 	if (row == 0)
