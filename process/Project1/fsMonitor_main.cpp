@@ -14,13 +14,18 @@ void eventProcessor(DatabaseConnection connection)
 {
 	EventProcessor EP;
 	EP.getNewEvent(connection);
+	printf("Calculating event score...\n");
 	int i_score = EP.calculateScore();
+	cout << "score calculated:" << i_score << "\n";
+	printf("Determining severity...\n");
 	EP.evaluateSeverity(i_score);
+	
 }
 
 void offlineTable(DatabaseConnection connection)
 {
 	OfflineTable::OfflineTable(connection);
+	printf("analyzing data...\n");
 }
 
 int main (int argc, char **argv)
@@ -47,6 +52,7 @@ int main (int argc, char **argv)
 
 	}
 	DatabaseConnection connection(host, user, password, database);
+	printf("Connecting to database...\n");
 	connection.connect();
 	eventProcessor(connection);
 	offlineTable(connection);

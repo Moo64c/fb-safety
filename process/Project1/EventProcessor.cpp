@@ -59,4 +59,6 @@ using namespace std;
 		event1.userIdTo = newEvent.userIdTo;
 		event1.userIdFrom = newEvent.userIdFrom;
 		event1.row_id = newEvent.row_id;
+		DatabaseConnection DC;
+		DC.updateRawDB(event1);
 	}
