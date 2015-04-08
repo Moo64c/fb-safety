@@ -101,7 +101,7 @@ rawEventEntry_t DatabaseConnection::getNextRow()
 	res.eventId = atoi(buffer);
 
 	sprintf_s(buffer, "%s", row[3]);
-	res.eventType = (event_type) atoi(buffer);
+	res.eventType = getEventType(buffer);
 
 	sprintf_s(buffer, "%s", row[4]);
 	res.likeAmount = atoi(buffer);
@@ -204,4 +204,20 @@ void DatabaseConnection::updateRawDB(processedEvent_t processed)
 	char buffer[200];
 	sprintf_s(buffer, UPDATE_RAW_TABLE_QUERY, processed.row_id, processed.severity, processed.cat);
 	mysql_query(rawConn, buffer);
+}
+
+event_type DatabaseConnection::getEventType(const char *eventText)
+{
+	if (strcmp(eventText, "STATUS_EVENT_TYPE") == 0)
+		return STATUS_EVENT_TYPE;
+	if (strcmp(eventText, "COMMENT_EVENT_TYPE") == 0)
+		return COMMENT_EVENT_TYPE;
+	if (strcmp(eventText, "PHOTO_EVENT_TYPE") == 0)
+		return PHOTO_EVENT_TYPE;
+	if (strcmp(eventText, "PRIVATE_MESSAGE_EVENT_TYPE") == 0)
+		return PRIVATE_MESSAGE_EVENT_TYPE;
+	if (strcmp(eventText, "LINK_EVENT_TYPE") == 0)
+		return LINK_EVENT_TYPE;
+
+	return OTHER_EVENT_TYPE;
 }

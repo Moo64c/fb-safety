@@ -49,5 +49,10 @@ protected:
 	vector<corpusWord_t> corpus;
 
 	void initMySQLResult(MYSQL_RES *res);
+	
+	event_type getEventType(const char *eventText);
+
+	};
+
 
 };
