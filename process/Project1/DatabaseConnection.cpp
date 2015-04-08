@@ -203,4 +203,5 @@ void DatabaseConnection::updateRawDB(processedEvent_t processed)
 {
 	char buffer[200];
 	sprintf_s(buffer, UPDATE_RAW_TABLE_QUERY, processed.row_id, processed.severity, processed.cat);
+	mysql_query(rawConn, buffer);
 }
