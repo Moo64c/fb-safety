@@ -14,6 +14,7 @@ public:
 	virtual ~DatabaseConnection();
 
 	rawEventEntry_t getNextRow();
+	void updateRawDB(processedEvent_t processed);
 	userData_t getNextUserData();
 	vector<corpusWord_t> getWords();
 
@@ -33,6 +34,7 @@ public:
 	static const char* RAW_FACEBOOK_GET_NEW_ROWS_QUERY;
 	static const char* GET_WORDS_QUERY;
 	static const char* GET_USER_DATA_QUERY;
+	static const char* UPDATE_RAW_TABLE_QUERY;
 	static const int NUMBER_OF_RAW_FIELDS;
 
 protected:

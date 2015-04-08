@@ -10,6 +10,7 @@ const char* DatabaseConnection::DEFAULT_DATABASE = "test";
 const char* DatabaseConnection::RAW_FACEBOOK_GET_NEW_ROWS_QUERY = "CALL `test`.`get_new_raw_data`();";
 const char* DatabaseConnection::GET_WORDS_QUERY = "CALL `test`.`get_words`()";
 const char* DatabaseConnection::GET_USER_DATA_QUERY = "call `test`.`get_user_processed_data_week`();";
+const char* DatabaseConnection::UPDATE_RAW_TABLE_QUERY = "call `test`.`update_raw_row`(%d, %d, %d);";
 
 DatabaseConnection::DatabaseConnection(const char *_host, const char *_user,
 	const char *_pass, const char *_db) :
@@ -198,3 +199,8 @@ void DatabaseConnection::runUsersQuery()
 	user_result = mysql_store_result(userConn);
 }
 
+void DatabaseConnection::updateRawDB(processedEvent_t processed)
+{
+	char buffer[200];
+	sprintf_s(buffer, UPDATE_RAW_TABLE_QUERY, processed.row_id, processed.severity, processed.cat);
+}
