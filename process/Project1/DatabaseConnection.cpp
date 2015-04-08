@@ -134,3 +134,9 @@ vector<corpusWord_t> DatabaseConnection::getWords()
 	return ans;
 }
 
+userData_t DatabaseConnection::getNextUserData()
+{
+	userData_t ans;
+	return ans;
+}
+

@@ -27,3 +27,13 @@ bool OfflineTable::change(int curr, int prev) {
 		return false;
 	return true;
 }
+
+OfflineTable::~OfflineTable()
+{
+
+}
+
+void OfflineTable::updateDB(struct userData_t)
+{
+
+}

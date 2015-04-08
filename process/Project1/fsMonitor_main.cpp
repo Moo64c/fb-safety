@@ -7,8 +7,6 @@
 #include "DatabaseConnection.h"
 #include "EventProcessor.h"
 #include "OfflineTable.h"
-#include "EventProcessor.cpp"
-#include "offlineTable.cpp"
 using namespace std;
 
 
@@ -27,10 +25,10 @@ void offlineTable(DatabaseConnection connection)
 
 int main (int argc, char **argv)
 {
-	const char* host;
-	const char* user;
-	const char* password;
-	const char* database;
+	const char* host = NULL;
+	const char* user = NULL;
+	const char* password = NULL;
+	const char* database = NULL;
 
 	for(int i=0; i< argc+1; i+2) {
 		if (strcmp("-h", *(argv+i))==0) {
