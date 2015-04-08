@@ -52,7 +52,4 @@ protected:
 	
 	event_type getEventType(const char *eventText);
 
-	};
-
-
 };
