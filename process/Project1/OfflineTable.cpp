@@ -14,6 +14,7 @@ OfflineTable::OfflineTable(DatabaseConnection connection) {
 	while (data.userId != 0) {         //userID == 0 : row is NULL
 		if (check(data))
 			updateDB (data);
+		data = connection.getNextUserData();
 	}
 }
 bool OfflineTable::check(userData_t data) {
