@@ -1,6 +1,7 @@
 #include "tableStructs.h"
 #include "OfflineTable.h"
 #include "DatabaseConnection.h"
+#include <time.h>
 
 using namespace std;
 
@@ -13,8 +14,10 @@ OfflineTable::OfflineTable(DatabaseConnection &connection) {
 
 	while (data.userId != 0) {         //userID == 0 : row is NULL
 		processedEvent_t processed;
-		processed.createdTime = 0;
-		processed.updatedTime = 0;
+		time_t ltime;
+		time(&ltime);
+		processed.createdTime = ltime;
+		processed.updatedTime = ltime;
 		processed.userIdTo = data.userId;
 		processed.frequency = data.frequency;
 		processed.sticky = 1;
