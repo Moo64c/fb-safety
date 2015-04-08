@@ -6,8 +6,8 @@
 using namespace std;
 
 int min_diff = 2;
-float sev_threshold = 1.2;
-float freq_threshold = 5;
+double sev_threshold = 1.2;
+double freq_threshold = 5;
 
 OfflineTable::OfflineTable(DatabaseConnection connection) {
 	userData_t data = connection.getNextUserData();
@@ -16,13 +16,13 @@ OfflineTable::OfflineTable(DatabaseConnection connection) {
 			updateDB (data);
 	}
 }
-bool check(userData_t data) {
+bool OfflineTable::check(userData_t data) {
 	if (change(data.averageSeverity, data.prevAverageSeverity) || (data.frequency > freq_threshold))
 		return true;
 	return false;
 }
 
-bool change(int curr, int prev) {
+bool OfflineTable::change(int curr, int prev) {
 	if ((prev == 0) || (curr - prev < min_diff) || ((float)curr / (float)prev < sev_threshold))
 		return false;
 	return true;
