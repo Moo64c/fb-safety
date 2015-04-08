@@ -11,6 +11,7 @@ const char* DatabaseConnection::RAW_FACEBOOK_GET_NEW_ROWS_QUERY = "CALL `get_new
 const char* DatabaseConnection::GET_WORDS_QUERY = "CALL `get_words`()";
 const char* DatabaseConnection::GET_USER_DATA_QUERY = "call `get_user_processed_data_week`();";
 const char* DatabaseConnection::UPDATE_RAW_TABLE_QUERY = "call update_raw_row(%d, %d, %d);";
+const char* DatabaseConnection::UPDATE_WEB_INTERFACE_QUERY = "call update_web_interface(%d, %d, %d, %d, %s, %s);";
 
 DatabaseConnection::DatabaseConnection(const char *_host, const char *_user,
 	const char *_pass, const char *_db, bool _verbosity) :
@@ -115,6 +116,12 @@ rawEventEntry_t DatabaseConnection::getNextRow()
 	sprintf_s(buffer, "%s", row[7]);
 	res.row_id = atoi(buffer);
 
+	sprintf_s(buffer, "%s", row[8]);
+	res.createdTime = atoi(buffer);
+
+	sprintf_s(buffer, "%s", row[9]);
+	res.updatedTime = atoi(buffer);
+
 	return res;
 }
 
@@ -203,6 +210,14 @@ void DatabaseConnection::updateRawDB(processedEvent_t processed)
 {
 	char buffer[200];
 	sprintf_s(buffer, UPDATE_RAW_TABLE_QUERY, processed.row_id, processed.severity, processed.cat);
+	mysql_query(updateConn, buffer);
+	updateWebInterface(processed);
+}
+
+void DatabaseConnection::updateWebInterface(processedEvent_t processed)
+{
+	char buffer[2000];
+	sprintf_s(buffer, UPDATE_WEB_INTERFACE_QUERY, /*processed., processed.severity, processed.cat*/0);
 	mysql_query(updateConn, buffer);
 }
 

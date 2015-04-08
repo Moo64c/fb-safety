@@ -15,6 +15,7 @@ public:
 
 	rawEventEntry_t getNextRow();
 	void updateRawDB(processedEvent_t processed);
+	void updateWebInterface(processedEvent_t processed);
 	userData_t getNextUserData();
 	vector<corpusWord_t> getWords();
 
@@ -36,6 +37,7 @@ public:
 	static const char* GET_WORDS_QUERY;
 	static const char* GET_USER_DATA_QUERY;
 	static const char* UPDATE_RAW_TABLE_QUERY;
+	static const char* UPDATE_WEB_INTERFACE_QUERY;
 	static const int NUMBER_OF_RAW_FIELDS;
 
 protected:
