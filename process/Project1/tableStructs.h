@@ -21,7 +21,7 @@ struct corpusWord_t{
 struct rawEventEntry_t {
 	int userIdTo;
 	int userIdFrom;
-	int eventId;
+	string eventId;
 	event_type eventType;
 	int likeAmount;
 	int commentAmount;
@@ -32,7 +32,7 @@ struct rawEventEntry_t {
 struct processedEvent_t {
 	int userIdTo;
 	int userIdFrom;
-	int eventId;
+	string eventId;
 	int severity;
 	category cat;
 	int row_id;
@@ -47,6 +47,4 @@ struct userData_t {
 	int averageSeverity;
 	int frequency;
 };
-rawEventEntry_t newEvent;
-processedEvent_t event1;
 #endif //PROCESSOR_DATA_TYPES

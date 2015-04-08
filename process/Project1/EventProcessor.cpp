@@ -17,8 +17,8 @@ using namespace std;
 	{
 		string data = newEvent.data;
 		int score=0;
-		vector<corpusWord_t> words = getWords();
-		int size = words.size();
+		vector<corpusWord_t> words = connection.getWords();
+		int size = (int) words.size();
 
 		for (int i=0; i<size+1; i++)
 			{
