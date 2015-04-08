@@ -9,18 +9,19 @@
 #include "OfflineTable.h"
 using namespace std;
 
-
 void eventProcessor(DatabaseConnection connection)
 {
-	EventProcessor EP;
-	EP.getNewEvent(connection);
-	printf("Calculating event score...\n");
-	int i_score = EP.calculateScore();
-	cout << "score calculated:" << i_score << "\n";
-	printf("Determining severity...\n");
-	EP.evaluateSeverity(i_score);
-	
-}
+
+	while (data.userId != 0) {
+		EventProcessor EP;
+		EP.getNewEvent(connection);
+		printf("Calculating event score...\n");
+		int i_score = EP.calculateScore();
+		cout << "score calculated:" << i_score << "\n";
+		printf("Determining severity...\n");
+		EP.evaluateSeverity(i_score);
+		{
+	}
 
 void offlineTable(DatabaseConnection connection)
 {
@@ -34,7 +35,6 @@ int main (int argc, char **argv)
 	const char* user = NULL;
 	const char* database = NULL;
 	const char* password = NULL;
-
 
 	for(int i=0; i < argc; i++) {
 		if (strcmp("-h", *(argv+i))==0) {
