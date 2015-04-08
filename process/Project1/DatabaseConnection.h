@@ -19,6 +19,7 @@ public:
 
 	int connect();
 	int runRawQuery();
+	void runUsersQuery();
 
 	void setHost(const char *_newHost) { host = _newHost; }
 	void setUser(const char *_newUser) { user = _newUser; }
@@ -30,16 +31,21 @@ public:
 	static const char* DEFAULT_PASSWORD;
 	static const char* DEFAULT_DATABASE;
 	static const char* RAW_FACEBOOK_GET_NEW_ROWS_QUERY;
+	static const char* GET_WORDS_QUERY;
+	static const char* GET_USER_DATA_QUERY;
 	static const int NUMBER_OF_RAW_FIELDS;
 
 protected:
-	MYSQL *con;
-	MYSQL_RES *result;
+	MYSQL *rawConn, *wordConn, *userConn;
+	MYSQL_RES *raw_result;
+	MYSQL_RES *word_result;
+	MYSQL_RES *user_result;
 	string host;
 	string user;
 	string pass;
 	string db;
+	vector<corpusWord_t> corpus;
 
-	void initResult();
+	void initMySQLResult(MYSQL_RES *res);
 
 };
