@@ -2,6 +2,7 @@
 #include <regex>
 #include "time.h"
 #include <iostream>
+#include <algorithm>
 
 const char* DatabaseConnection::DEFAULT_HOST = "localhost";
 const char* DatabaseConnection::DEFAULT_USER = "root";
@@ -11,7 +12,7 @@ const char* DatabaseConnection::RAW_FACEBOOK_GET_NEW_ROWS_QUERY = "CALL `get_new
 const char* DatabaseConnection::GET_WORDS_QUERY = "CALL `get_words`()";
 const char* DatabaseConnection::GET_USER_DATA_QUERY = "call `get_user_processed_data_week`();";
 const char* DatabaseConnection::UPDATE_RAW_TABLE_QUERY = "call update_raw_row(%d, %d, %d);";
-const char* DatabaseConnection::UPDATE_WEB_INTERFACE_QUERY = "call update_web_interface(%d, %d, %d, %d, %s, %s);";
+const char* DatabaseConnection::UPDATE_WEB_INTERFACE_QUERY = "call update_web_interface(%d, %d, %d, %d, %d, %s, %s);";
 
 DatabaseConnection::DatabaseConnection(const char *_host, const char *_user,
 	const char *_pass, const char *_db, bool _verbosity) :
@@ -217,7 +218,10 @@ void DatabaseConnection::updateRawDB(processedEvent_t processed)
 void DatabaseConnection::updateWebInterface(processedEvent_t processed)
 {
 	char buffer[2000];
-	sprintf_s(buffer, UPDATE_WEB_INTERFACE_QUERY, /*processed., processed.severity, processed.cat*/0);
+	int time = (processed.updatedTime > processed.createdTime) ? processed.updatedTime : processed.createdTime;
+	sprintf_s(buffer, UPDATE_WEB_INTERFACE_QUERY, time, processed.userIdTo, 
+		processed.severity, processed.frequency, processed.sticky,
+		processed.title.c_str(), processed.body.c_str());
 	mysql_query(updateConn, buffer);
 }
 

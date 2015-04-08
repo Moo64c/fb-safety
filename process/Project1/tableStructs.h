@@ -38,6 +38,7 @@ struct processedEvent_t {
 	int severity;
 	int frequency;
 	int sticky;
+	int alert;//0 or 1
 	int row_id;
 	category cat;
 	string title;
