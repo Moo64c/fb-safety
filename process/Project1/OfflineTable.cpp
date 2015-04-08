@@ -12,7 +12,7 @@ double freq_threshold = 5;
 OfflineTable::OfflineTable(DatabaseConnection &connection) {
 	userData_t data = connection.getNextUserData();
 
-	while (data.userId != 0) {         //userID == 0 : row is NULL
+	while (!data.userId.empty()) {         //userID == 0 : row is NULL
 		processedEvent_t processed;
 		time_t ltime;
 		time(&ltime);
