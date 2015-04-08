@@ -33,6 +33,7 @@ using namespace std;
 				{
 					 score += words[i].score;
 					 event1.cat = words[i].cat;
+					 event1.body = "Expration found: " + words[i].word;
 				}
 			}
 		if (score>0)
@@ -59,9 +60,15 @@ using namespace std;
 		if (5>score && score>2) {event1.severity = 2;}
 		if (8>score && score>4) {event1.severity = 3;}
 		if (score>7)   {event1.severity = 4;}
-		event1.eventId = newEvent.eventId;
-		event1.userIdTo = newEvent.userIdTo;
-		event1.userIdFrom = newEvent.userIdFrom;
 		event1.row_id = newEvent.row_id;
+		event1.userIdTo = newEvent.userIdTo;
+		event1.row_id = newEvent.row_id;
+		event1.sticky = 0;
+		event1.createdTime = newEvent.createdTime;
+		event1.frequency = 0;
+		event1.title = "Event Type: " + event1.cat;
+		if (event1.severity < 3){
+			event1.body = "";
+		}
 		connection->updateRawDB(event1);
 	}
