@@ -23,7 +23,7 @@ bool OfflineTable::check(userData_t data) {
 	return false;
 }
 
-bool OfflineTable::change(int curr, int prev) {
+bool OfflineTable::change(double curr, double prev) {
 	if ((prev == 0) || (curr - prev < min_diff) || ((float)curr / (float)prev < sev_threshold))
 		return false;
 	return true;

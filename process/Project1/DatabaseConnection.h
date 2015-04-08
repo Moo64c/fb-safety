@@ -39,7 +39,7 @@ public:
 	static const int NUMBER_OF_RAW_FIELDS;
 
 protected:
-	MYSQL *rawConn, *wordConn, *userConn;
+	MYSQL *rawConn, *wordConn, *userConn, *updateConn;
 	MYSQL_RES *raw_result;
 	MYSQL_RES *word_result;
 	MYSQL_RES *user_result;

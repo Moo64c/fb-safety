@@ -6,11 +6,11 @@
 const char* DatabaseConnection::DEFAULT_HOST = "localhost";
 const char* DatabaseConnection::DEFAULT_USER = "root";
 const char* DatabaseConnection::DEFAULT_PASSWORD = "qwerty";
-const char* DatabaseConnection::DEFAULT_DATABASE = "test";
-const char* DatabaseConnection::RAW_FACEBOOK_GET_NEW_ROWS_QUERY = "CALL `test`.`get_new_raw_data`();";
-const char* DatabaseConnection::GET_WORDS_QUERY = "CALL `test`.`get_words`()";
-const char* DatabaseConnection::GET_USER_DATA_QUERY = "call `test`.`get_user_processed_data_week`();";
-const char* DatabaseConnection::UPDATE_RAW_TABLE_QUERY = "call test.update_raw_row(%d, %d, %d);";
+const char* DatabaseConnection::DEFAULT_DATABASE = "fb_safety";
+const char* DatabaseConnection::RAW_FACEBOOK_GET_NEW_ROWS_QUERY = "CALL `get_new_raw_data`();";
+const char* DatabaseConnection::GET_WORDS_QUERY = "CALL `get_words`()";
+const char* DatabaseConnection::GET_USER_DATA_QUERY = "call `get_user_processed_data_week`();";
+const char* DatabaseConnection::UPDATE_RAW_TABLE_QUERY = "call update_raw_row(%d, %d, %d);";
 
 DatabaseConnection::DatabaseConnection(const char *_host, const char *_user,
 	const char *_pass, const char *_db, bool _verbosity) :
@@ -29,16 +29,18 @@ DatabaseConnection::DatabaseConnection(const char *_host, const char *_user,
 	rawConn = mysql_init(NULL);
 	wordConn = mysql_init(NULL);
 	userConn = mysql_init(NULL);
+	updateConn = mysql_init(NULL);
 }
 
 int DatabaseConnection::connect()
 {
 	if (mysql_real_connect(rawConn, host.c_str(), user.c_str(), pass.c_str(),
+		db.c_str(), 0, NULL, 0) == NULL ||
+		mysql_real_connect(updateConn, host.c_str(), user.c_str(), pass.c_str(),
 		db.c_str(), 0, NULL, 0) == NULL)
 	{
 		mysql_close(rawConn);
-		mysql_close(wordConn);
-		mysql_close(userConn);
+		mysql_close(updateConn);
 		return  99;
 	}
 	return 0;
@@ -201,7 +203,7 @@ void DatabaseConnection::updateRawDB(processedEvent_t processed)
 {
 	char buffer[200];
 	sprintf_s(buffer, UPDATE_RAW_TABLE_QUERY, processed.row_id, processed.severity, processed.cat);
-	mysql_query(rawConn, buffer);
+	mysql_query(updateConn, buffer);
 }
 
 event_type DatabaseConnection::getEventType(const char *eventText)
