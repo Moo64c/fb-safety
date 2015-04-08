@@ -48,9 +48,7 @@ abstract class FbParserJsonBase implements FbParserInterface {
         $row_data = array();
         foreach($this->map as $key => $values) {
           // Use the header value to assign a field name.
-          if (!empty($row[$key])) {
-            $row_data[$values['field']] = $this->filter($values['filter'], $row[$key]);
-          }
+          $row_data[$values['field']] =  $this->filter($values, !empty($row[$key]) ? $row[$key] : "");
         }
         $return_data[] = $row_data;
       }
@@ -73,8 +71,12 @@ abstract class FbParserJsonBase implements FbParserInterface {
    * @return mixed
    */
   protected function filter($filter_type, $data) {
-    $function_name  = "fb_safety_general_data_filter_$filter_type";
-    return function_exists($function_name) ? $function_name($data) : $data;
+    $filter = $filter_type['filter'];
+    $function_name  = "fb_safety_general_data_filter_$filter";
+    if ($filter == "force_value") {
+      return $filter_type['value'];
+    }
+    return function_exists($function_name) ? check_plain($function_name($data)) : check_plain($data);
   }
 
   /**
