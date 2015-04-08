@@ -4,7 +4,7 @@
  * Class file to create Hiro JSON requests.
  */
 
-class HiroRequestJson implements HiroRequestInterface {
+class FbRequestJson implements FbRequestInterface {
   public $businessEntityId;
   private $logger;
   private $node;
@@ -17,8 +17,6 @@ class HiroRequestJson implements HiroRequestInterface {
   /**
    * Constructor.
    *
-   * @param HiroLogger $logger
-   *   Logger object.
    * @param $node
    *   Media seller being processed.
    * @param $cookie
@@ -26,8 +24,7 @@ class HiroRequestJson implements HiroRequestInterface {
    * @param NULL|String $server_name
    *   Server name dependency injection.
    */
-  public function __construct(HiroLogger $logger, $node, $cookie = NULL, $server_name = NULL) {
-    $this->logger = $logger;
+  public function __construct($node, $cookie = NULL, $server_name = NULL) {
     $this->node = $node;
     $this->cookie = $cookie;
     $this->hasError = FALSE;
@@ -111,7 +108,7 @@ class HiroRequestJson implements HiroRequestInterface {
    * @return array
    *  Data received from the server.
    */
-  public function performRequest(HiroDateInterface $date, $request_type, $unique_id = NULL) {
+  public function performRequest($request_type, $unique_id = NULL) {
     // Check log in status and attempt a retry if needed.
     if (!$this->isLoggedIn()) {
       $this->logger("Could not perform request, login failed.");
