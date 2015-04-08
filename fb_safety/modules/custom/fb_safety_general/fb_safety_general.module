@@ -22,3 +22,37 @@ function fb_safety_general_data_filter_from_id($data) {
 function fb_safety_general_data_filter_time($data) {
   return strtotime($data);
 }
+
+function fb_safety_general_data_filter_type_selector($data) {
+  $types = array(
+    'status' => 'STATUS_EVENT_TYPE',
+    'comment' => 'COMMENT_EVENT_TYPE',
+    'link' => 'LINK_EVENT_TYPE',
+    'photo' => 'PHOTO_EVENT_TYPE',
+    'video' => 'VIDEO_EVENT_TYPE',
+  );
+
+  return !empty($types[$data]) ? $types[$data] : $data;
+}
+
+function fb_safety_general_data_filter_data_amount($data) {
+  return empty($data) || empty($data['data']) ? 0 : count($data['data']);
+}
+
+function fb_safety_general_data_filter_feed_comments($data) {
+  // Special filter - returns an array of comments to be inserted to db.
+  $comments = array();
+
+  if (empty($data['data'])) {
+    return $comments;
+  }
+
+  $parser = new FbParserJsonInbox();
+  $parser->extractComments($data['data'], $comments);
+
+  foreach ($comments as &$comment) {
+    $comment['event_type'] = 'COMMENT_EVENT_TYPE';
+  }
+
+  return $comments;
+}

@@ -17,7 +17,9 @@ function fb_safety_general_schema() {
       'updated_time'  => array('type' => "int"),
       'likeAmount'    => array('type' => 'int'),
       'commentAmount' => array('type' => 'int'),
-      'data'  => array('type' => 'text', 'collation' => 'utf8mb4_bin'),
+      'data'          => array('type' => 'text', 'collation' => 'utf8mb4_bin'),
+      'severity'      => array('type' => 'int'),
+      'category'      => array('type' => 'int'),
     ),
 
     'primary key' => array('row_id', 'user_id_to'),
