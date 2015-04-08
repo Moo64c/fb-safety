@@ -42,7 +42,7 @@ using namespace std;
 			}
 			if (newEvent.likeAmount+newEvent.commentAmount>10)
 			{
-				score+=4;
+				score+=3;
 			}
 		}
 		return (score);
