@@ -25,8 +25,15 @@ function fb_safety_users_graphs_content_type_render($subtype, $conf, $args, $con
 
   $events = array();
   $child_wrapper = $wrapper->field_children;
+  if (empty($child_wrapper)) {
+    return;
+  }
   $child_events = array();
   $child_name = $child_wrapper->label();
+
+  if (empty($child_wrapper->field_events)) {
+    return;
+  }
 
   foreach ($child_wrapper->field_events as $event_wrapper) {
     $event_id = $event_wrapper->getIdentifier();

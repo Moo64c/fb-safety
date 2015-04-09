@@ -5,5 +5,5 @@ grunt build
 cd ..
 
 # Copy the custom assets folders.
-mkdir cri/libraries/cri
+mkdir fb-safety/libraries/fb-safety
 rsync -avz --exclude '.git' jekyll/dist/ cri/libraries/cri
