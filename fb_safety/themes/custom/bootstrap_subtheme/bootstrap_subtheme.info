@@ -28,6 +28,7 @@ regions[page_bottom]    = 'Page bottom'
 ;Our design
 stylesheets[all][] = '../../../libraries/fb_safety/css/main.css'
 stylesheets[all][] = 'css/style.css'
+stylesheets[all][] = 'css/c3.min.css'
 
 
 ; For information on choosing the desired method, please read the Drupal
@@ -42,6 +43,8 @@ stylesheets[all][] = 'css/style.css'
 ;; Scripts
 ;;;;;;;;;;;;;;;;;;;;;
 
+scripts[] = js/d3.min.js
+scripts[] = js/c3.min.js
 scripts[] = '../../../libraries/bootstrap_sass/vendor/assets/javascripts/bootstrap/affix.js'
 scripts[] = '../../../libraries/bootstrap_sass/vendor/assets/javascripts/bootstrap/alert.js'
 scripts[] = '../../../libraries/bootstrap_sass/vendor/assets/javascripts/bootstrap/button.js'

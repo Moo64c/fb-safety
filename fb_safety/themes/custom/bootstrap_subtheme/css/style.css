@@ -16,7 +16,6 @@ body .main .content .text-content {
   border-radius: 25px;
   display: block;
   width: 90%;
-
   margin: 10px auto;
 }
 
@@ -76,7 +75,7 @@ a.logo img {
   margin-top: -20px;
 }
 header {
-  background: rgb(166, 161, 190);
+  background: rgb(228, 225, 202);
   height: 120px;
   overflow: hidden;
 }

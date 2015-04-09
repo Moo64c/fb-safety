@@ -57,3 +57,5 @@ dependencies[] = wysiwyg
 
 ; Custom modules
 dependencies[] = fb_safety_general
+dependencies[] = fb_safety_pages
+dependencies[] = fb_safety_users
