@@ -79,8 +79,8 @@ DatabaseConnection::~DatabaseConnection()
 rawEventEntry_t DatabaseConnection::getNextRow()
 {
 	rawEventEntry_t res;
-	res.userIdFrom = 0;
-	res.userIdTo = 0;
+	res.userIdFrom;
+	res.userIdTo;
 
 	if (raw_result == 0)
 		runRawQuery();
@@ -161,7 +161,7 @@ vector<corpusWord_t> DatabaseConnection::getWords()
 userData_t DatabaseConnection::getNextUserData()
 {
 	userData_t res;
-	res.userId = 0;
+	res.userId;
 	if (user_result == 0)
 	{
 		runUsersQuery();

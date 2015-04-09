@@ -13,7 +13,7 @@ void eventProcessor(DatabaseConnection connection)
 {
 	EventProcessor EP(&connection);
 	EP.getNewEvent();
-	while (EP.newEvent.userIdTo != 0) {
+	while (!(EP.newEvent.userIdTo.empty())) {
 		printf("Calculating event score...\n");
 		int i_score = EP.calculateScore();
 		cout << "score calculated:" << i_score << "\n";

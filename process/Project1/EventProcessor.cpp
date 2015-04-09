@@ -22,6 +22,7 @@ using namespace std;
 	int EventProcessor::calculateScore()						 
 	{
 		string data = newEvent.data;
+		printf("data: %s\n", newEvent.data.c_str());
 		int score=0;
 		vector<corpusWord_t> words = connection->getWords();
 		int size = (int) words.size();
