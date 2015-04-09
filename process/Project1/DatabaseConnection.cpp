@@ -50,6 +50,7 @@ int DatabaseConnection::connect()
 
 int DatabaseConnection::runRawQuery()
 {
+	mysql_set_character_set(rawConn, "utf8mb4");
 	int ans = mysql_query(rawConn, RAW_FACEBOOK_GET_NEW_ROWS_QUERY);
 	if (ans != 0)
 		return ans;
