@@ -12,7 +12,7 @@ const char* DatabaseConnection::RAW_FACEBOOK_GET_NEW_ROWS_QUERY = "CALL `get_new
 const char* DatabaseConnection::GET_WORDS_QUERY = "CALL `get_words`()";
 const char* DatabaseConnection::GET_USER_DATA_QUERY = "call `get_user_processed_data_week`();";
 const char* DatabaseConnection::UPDATE_RAW_TABLE_QUERY = "call update_raw_row(%d, %d, %d);";
-const char* DatabaseConnection::UPDATE_WEB_INTERFACE_QUERY = "call update_web_interface(%d, %d, %d, %d, %d, %s, %s);";
+const char* DatabaseConnection::UPDATE_WEB_INTERFACE_QUERY = "call update_web_interface(%d, %d, %s, %d, %d, %d, %d, %s, %s);";
 
 DatabaseConnection::DatabaseConnection(const char *_host, const char *_user,
 	const char *_pass, const char *_db, bool _verbosity) :
@@ -94,10 +94,10 @@ rawEventEntry_t DatabaseConnection::getNextRow()
 
 	char buffer[1600];
 	sprintf_s(buffer, "%s", row[0]);
-	res.userIdTo = atoi(buffer);
+	res.userIdTo = buffer;
 
 	sprintf_s(buffer, "%s", row[1]);
-	res.userIdFrom = atoi(buffer);
+	res.userIdFrom = buffer;
 
 	sprintf_s(buffer, "%s", row[2]);
 	res.eventId = atoi(buffer);
@@ -118,10 +118,10 @@ rawEventEntry_t DatabaseConnection::getNextRow()
 	res.row_id = atoi(buffer);
 
 	sprintf_s(buffer, "%s", row[8]);
-	res.createdTime = atoi(buffer);
+	res.createdTime = buffer;
 
 	sprintf_s(buffer, "%s", row[9]);
-	res.updatedTime = atoi(buffer);
+	res.updatedTime = buffer;
 
 	return res;
 }
@@ -175,10 +175,10 @@ userData_t DatabaseConnection::getNextUserData()
 
 	char buffer[1600];
 	sprintf_s(buffer, "%s", row[0]);
-	res.userId = atoi(buffer);
+	res.userId = buffer;
 
 	sprintf_s(buffer, "%s", row[1]);
-	res.maxUserIdFrom = atoi(buffer);
+	res.maxUserIdFrom = buffer;
 
 	sprintf_s(buffer, "%s", row[6]);
 	res.numOfEvents = atoi(buffer);
@@ -218,9 +218,8 @@ void DatabaseConnection::updateRawDB(processedEvent_t processed)
 void DatabaseConnection::updateWebInterface(processedEvent_t processed)
 {
 	char buffer[2000];
-	int time = (processed.updatedTime > processed.createdTime) ? processed.updatedTime : processed.createdTime;
-	sprintf_s(buffer, UPDATE_WEB_INTERFACE_QUERY, time, processed.userIdTo, 
-		processed.severity, processed.frequency, processed.sticky,
+	sprintf_s(buffer, UPDATE_WEB_INTERFACE_QUERY, processed.createdTime, processed.updatedTime, processed.userIdTo.c_str(),
+		processed.severity, processed.frequency, processed.sticky, processed.alert,
 		processed.title.c_str(), processed.body.c_str());
 	mysql_query(updateConn, buffer);
 }

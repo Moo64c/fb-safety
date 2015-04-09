@@ -11,7 +11,7 @@ cd $ROOT
 # Build the profile itself.
 (
   cd fb_safety
-  #$DRUSH make --quiet --no-core --contrib-destination drupal-org.make .
+  $DRUSH make --quiet --no-core --contrib-destination drupal-org.make .
   cd ..
 )
 
