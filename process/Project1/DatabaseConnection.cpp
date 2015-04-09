@@ -50,6 +50,7 @@ int DatabaseConnection::connect()
 
 int DatabaseConnection::runRawQuery()
 {
+	mysql_set_character_set(rawConn, "utf8mb4");
 	int ans = mysql_query(rawConn, RAW_FACEBOOK_GET_NEW_ROWS_QUERY);
 	if (ans != 0)
 		return ans;
@@ -79,8 +80,8 @@ DatabaseConnection::~DatabaseConnection()
 rawEventEntry_t DatabaseConnection::getNextRow()
 {
 	rawEventEntry_t res;
-	res.userIdFrom = 0;
-	res.userIdTo = 0;
+	res.userIdFrom;
+	res.userIdTo;
 
 	if (raw_result == 0)
 		runRawQuery();
@@ -161,7 +162,7 @@ vector<corpusWord_t> DatabaseConnection::getWords()
 userData_t DatabaseConnection::getNextUserData()
 {
 	userData_t res;
-	res.userId = 0;
+	res.userId;
 	if (user_result == 0)
 	{
 		runUsersQuery();

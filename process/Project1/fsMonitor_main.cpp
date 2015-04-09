@@ -13,20 +13,20 @@ void eventProcessor(DatabaseConnection connection)
 {
 	EventProcessor EP(&connection);
 	EP.getNewEvent();
-	while (EP.newEvent.userIdTo != 0) {
-		printf("Calculating event score...\n");
+	printf("Calculating events' severy...\n");
+	while (!(EP.newEvent.userIdTo.empty())) {
 		int i_score = EP.calculateScore();
-		cout << "score calculated:" << i_score << "\n";
-		printf("Determining severity...\n");
 		EP.evaluateSeverity(i_score);
 		EP.getNewEvent();
 	}
+	printf("Calculated events' severy.\n");
 }
 
 void offlineTable(DatabaseConnection connection)
 {
-	OfflineTable::OfflineTable(connection);
 	printf("analyzing data...\n");
+	OfflineTable::OfflineTable(connection);
+	printf("analyzed data. Done!");
 }
 
 int main (int argc, char **argv)
@@ -56,6 +56,4 @@ int main (int argc, char **argv)
 	connection.connect();
 	eventProcessor(connection);
 	offlineTable(connection);
-	int i;
-	cin >> i;
 }
