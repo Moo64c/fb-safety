@@ -22,6 +22,7 @@ function fb_safety_users_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Recent Events';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -29,7 +30,7 @@ function fb_safety_users_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_plugin'] = 'node';
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
@@ -54,6 +55,17 @@ function fb_safety_users_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Severity */
+  $handler->display->display_options['fields']['field_severity']['id'] = 'field_severity';
+  $handler->display->display_options['fields']['field_severity']['table'] = 'field_data_field_severity';
+  $handler->display->display_options['fields']['field_severity']['field'] = 'field_severity';
+  $handler->display->display_options['fields']['field_severity']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -98,6 +110,7 @@ function fb_safety_users_views_default_views() {
   );
   $translatables['events'] = array(
     t('Master'),
+    t('Recent Events'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -114,6 +127,8 @@ function fb_safety_users_views_default_views() {
     t('No events found for user %1'),
     t('Content referencing Content from field_events'),
     t('User referencing Content from field_children'),
+    t('Severity'),
+    t('Body'),
     t('All'),
     t('Content pane'),
     t('View panes'),
