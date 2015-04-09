@@ -13,13 +13,13 @@ void eventProcessor(DatabaseConnection connection)
 {
 	EventProcessor EP(&connection);
 	EP.getNewEvent();
-	printf("Calculating events' severy...\n");
+	printf("Calculating events' severity...\n");
 	while (!(EP.newEvent.userIdTo.empty())) {
 		int i_score = EP.calculateScore();
 		EP.evaluateSeverity(i_score);
 		EP.getNewEvent();
 	}
-	printf("Calculated events' severy.\n");
+	printf("Calculated events' severity.\n");
 }
 
 void offlineTable(DatabaseConnection connection)
