@@ -5,6 +5,7 @@
     </div>
     <div class="event-content">
       <div class="event-title"><?php print $title; ?></div>
+      <div class="event-date"><?php print $date ?></div>
       <div class="event-body"><?php print $body; ?></div>
     </div>
   </article>

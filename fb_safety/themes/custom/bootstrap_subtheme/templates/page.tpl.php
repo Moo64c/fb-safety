@@ -77,9 +77,15 @@
   <div class="container">
     <div class="navbar-header">
       <?php if ($logo): ?>
-      <a class="logo navbar-btn pull-left" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
-        <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-      </a>
+        <a class="logo navbar-btn pull-left" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
+          <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+        </a>
+      <?php endif; ?>
+
+      <?php if ($login): ?>
+        <div class="header-right">
+          <?php print $login; ?>
+        </div>
       <?php endif; ?>
     </div>
 
@@ -102,9 +108,6 @@
       <?php if (!empty($breadcrumb)): print $breadcrumb; endif;?>
       <a id="main-content"></a>
       <?php print render($title_prefix); ?>
-      <?php if (!empty($title)): ?>
-        <h1 class="page-header"><?php print $title; ?></h1>
-      <?php endif; ?>
       <?php print render($title_suffix); ?>
       <?php print $messages; ?>
       <?php if (!empty($tabs)): ?>

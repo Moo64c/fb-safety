@@ -9,7 +9,19 @@
  * Preprocess page.
  */
 function bootstrap_subtheme_preprocess_page(&$variables) {
+  global $user;
+  $login = "";
 
+  if (empty($user->uid)) {
+    $form = drupal_get_form('user_login_block');
+    unset($form['links']);
+    $login = drupal_render($form);
+  }
+  else {
+    $login = l('logout', 'user/logout');
+  }
+
+  $variables['login'] = $login;
 }
 
 /**
@@ -46,8 +58,11 @@ function bootstrap_subtheme_preprocess_node__event__teaser(&$variables) {
   if (is_array($variables['body'])) {
     $variables['body'] = $variables['body']['safe_value'];
   }
+
+  $time = $wrapper->created->value();
   $variables['class'] = empty($classes[$tid]) ? "yellow" : $classes[$tid];
   $variables['icon'] = _bootstrap_subtheme_event_icon($tid, $variables['class']);
+  $variables['date'] = date("d-m-Y", $time);
 }
 
 /**
