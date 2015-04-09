@@ -22,6 +22,7 @@ class EventProcessor
 		rawEventEntry_t newEvent;
 
     private:
+		string Type(int typeNum);
         processedEvent_t event1;
 		DatabaseConnection *connection;
 

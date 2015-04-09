@@ -66,9 +66,28 @@ using namespace std;
 		event1.sticky = 0;
 		event1.createdTime = newEvent.createdTime;
 		event1.frequency = 0;
-		event1.title = "Event Type: " + event1.cat;
+		string type1 = Type(event1.cat);
+		event1.title = "Event Type: " + type1;
 		if (event1.severity < 3){
 			event1.body = "";
 		}
 		connection->updateRawDB(event1);
+	}
+
+	string EventProcessor::Type(int typeNum)
+	{
+		string type;
+		if (typeNum == 1) {
+			type == "PROFANITY";
+		}
+		if (typeNum == 2) {
+			type == "SUICIDAL";
+		}
+		if (typeNum == 3) {
+			type == "SEXUAL";
+		}
+		if (typeNum == 4){
+			type == "OTHER";
+		}
+		return(type);
 	}
