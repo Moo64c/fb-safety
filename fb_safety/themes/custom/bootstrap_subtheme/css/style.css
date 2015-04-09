@@ -13,6 +13,7 @@ body .main .content .text-content {
 
 /*# sourceMappingURL=style.css.map */
 .event-teaser {
+  border-radius: 25px;
   display: block;
   width: 90%;
 
@@ -34,7 +35,7 @@ body .main .content .text-content {
 .event-teaser.red2 {
   background: #f07050;
 }
-.event-teaser.blue {
+.event-teaser.blue3 {
   background: #a8f696;
 }
 
@@ -43,6 +44,9 @@ body .main .content .text-content {
 }
 .event-title {
   margin-top: 5px;
+  font-weight: bold;
+  font-size: 18px;
+  padding-top: 20px;
 }
 
 .views-row {
@@ -57,7 +61,22 @@ img.event-icon {
   float: left;
 }
 
-
 body {
   font: 14px "lucida grande", tahoma, verdana, arial, sans-serif;
+  margin: 0;
+}
+
+a.logo {
+  overflow: hidden;
+  height: 100px;
+}
+
+a.logo img {
+  height: 150px;
+  margin-top: -20px;
+}
+header {
+  background: rgb(166, 161, 190);
+  height: 120px;
+  overflow: hidden;
 }

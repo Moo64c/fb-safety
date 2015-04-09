@@ -38,7 +38,7 @@ function bootstrap_subtheme_preprocess_node__event__teaser(&$variables) {
     2 => 'orange',
     3 => 'red',
     4 => 'red2',
-    5 => 'blue',
+    5 => 'blue3',
   );
 
   $variables['title'] = $wrapper->label();
