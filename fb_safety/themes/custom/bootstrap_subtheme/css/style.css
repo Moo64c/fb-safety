@@ -80,3 +80,45 @@ header {
   height: 120px;
   overflow: hidden;
 }
+.region {
+  padding: 10px;
+}
+
+.header-right {
+  float: right;
+  display: inline;
+  padding: 10px;
+}
+
+.header-right ul {
+  float: none;
+  display: inline;
+  padding: 10px;
+  list-style: none;
+
+}
+.header-right ul li{
+  display: block;
+}
+.header-right ul li a{
+  float: right;
+}
+
+.form-item {
+  float: left;
+}
+.header-right input, .header-right label {
+  margin-left: 10px;
+}
+
+.header-right button {
+  margin-left: 10px;
+}
+
+.view-events ul.pagination {
+  list-style: none;
+}
+.view-events ul.pagination  li {
+  float: left;
+  margin: 10px;
+}
