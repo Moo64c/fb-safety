@@ -12,3 +12,71 @@ body .main .content .text-content {
   margin-left: 10px; }
 
 /*# sourceMappingURL=style.css.map */
+.event-teaser {
+  border-radius: 25px;
+  display: block;
+  width: 90%;
+
+  margin: 10px auto;
+}
+
+.event-teaser.yellow {
+  background: #eee053;
+}
+
+.event-teaser.orange {
+  background: #f0b150;
+}
+
+.event-teaser.red {
+  background: #f09950;
+}
+
+.event-teaser.red2 {
+  background: #f07050;
+}
+.event-teaser.blue3 {
+  background: #a8f696;
+}
+
+.event-content {
+  margin-left: 15px;
+}
+.event-title {
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: 18px;
+  padding-top: 20px;
+}
+
+.views-row {
+  display: block;
+  position: relative;
+}
+
+img.event-icon {
+  padding: 15px;
+  height: 75px;
+  width: 75px;
+  float: left;
+}
+
+body {
+  font: 14px "lucida grande", tahoma, verdana, arial, sans-serif;
+  margin: 0;
+}
+
+a.logo {
+  overflow: hidden;
+  height: 100px;
+}
+
+a.logo img {
+  height: 150px;
+  margin-top: -20px;
+}
+header {
+  background: rgb(166, 161, 190);
+  height: 120px;
+  overflow: hidden;
+}

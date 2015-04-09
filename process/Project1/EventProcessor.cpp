@@ -33,7 +33,7 @@ using namespace std;
 				{
 					 score += words[i].score;
 					 event1.cat = words[i].cat;
-					 event1.body = "Expration found: " + words[i].word;
+					 event1.body = event1.body + "Expration found: " + words[i].word;
 				}
 			}
 		if (score>0)

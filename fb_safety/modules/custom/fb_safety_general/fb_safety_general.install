@@ -13,7 +13,7 @@ function fb_safety_general_schema() {
       'user_id_to'    => array('type' => 'varchar', 'length' => 100, 'not null' => TRUE),
       'user_id_from'  => array('type' => 'varchar', 'length' => 100, 'not null' => TRUE),
       'event_type'    => array('type' => 'varchar', 'length' => 100, 'not null' => TRUE),
-      'created_time'  => array('type' => 'int', 'values' => 20),
+      'created_time'  => array('type' => 'int'),
       'updated_time'  => array('type' => "int"),
       'likeAmount'    => array('type' => 'int'),
       'commentAmount' => array('type' => 'int'),
